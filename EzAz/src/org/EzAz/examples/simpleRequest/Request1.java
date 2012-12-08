@@ -51,19 +51,10 @@ public class Request1 {
 	 */
 	public static void main(String[] args) {
 		Request1 r=new Request1();
-		// Load properties file
 		r.loadProps();
-		// Initialize connection to PDP (policy decision point)
-		// called "dummy" and get a handle. This name is defined in
-		// the properties file.
-		// We need this handle to communicate with the PDP.
-		PDPService pdp=PDPserviceFactory.getPDP("dummy");
-		// Now construct a new request.
+		
 		Request req=PDPserviceFactory.newRequest();
-		// Our request also implements the AttributeHelper interface.
 		AttributeHelper h=(AttributeHelper)req;
-
-		// Now create attributes on the request.
 		h.addAttribute(AttributeEntity.CAT_SUBJECT,
 				Identifier.create("subject-id"), null, "jack");
 		h.addAttribute(AttributeEntity.CAT_ACTION,
@@ -72,11 +63,8 @@ public class Request1 {
 				Identifier.create("resource-type"), null, "document");
 		h.addAttribute(AttributeEntity.CAT_RESOURCE,
 				Identifier.create("resource-id"), null, "TPSreport25.xls");
-		
-		// Print out the request
 		genericLayer2Utils.prettyPrint(req);
-
-		// Now call the PDP using the evaluate() function.
+		PDPService pdp=PDPserviceFactory.getPDP("dummy");
 		Response resp;
 		try {
 			resp = pdp.evaluate(req);
@@ -85,8 +73,6 @@ public class Request1 {
 			e.printStackTrace();
 			return;
 		}
-		
-		// Check whether the response allows our request.
 		System.out.println("IS ALLOWED? "+resp.isAllowed(false));
 	}
 	
