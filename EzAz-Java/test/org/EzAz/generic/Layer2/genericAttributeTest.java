@@ -163,6 +163,7 @@ public class genericAttributeTest {
 		assertTrue("Double is NOT multi-value!", !test.isMultiValue());
 		
 		test=new genericAttribute();
+		@SuppressWarnings("rawtypes")
 		ArrayList al=new ArrayList();
 		test.setValue(al);
 		assertTrue("Arraylist is multi-value!", test.isMultiValue());
