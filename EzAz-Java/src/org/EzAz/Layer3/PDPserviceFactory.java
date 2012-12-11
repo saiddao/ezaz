@@ -1,4 +1,5 @@
 package org.EzAz.Layer3;
+
 /**
  * Copyright 2012 Felix Gaehtgens
  *
@@ -37,7 +38,8 @@ public class PDPserviceFactory {
 	static Class<Result> resultClass = null;
 	static Class<Response> responseClass = null;
 	static Class<Attribute> attributeClass = null;
-	private static abstractMap<String,PDPService> pdps=new abstractMap<String,PDPService>();
+	org.EzAz.Layer2.layer2Bootstrapper layer2BootStrapper;
+	private static abstractMap<String, PDPService> pdps = new abstractMap<String, PDPService>();
 
 	public PDPserviceFactory() {
 
@@ -60,7 +62,8 @@ public class PDPserviceFactory {
 	 */
 	public static PDPService getPDP(String instance) {
 		if (!pdps.containsKey(instance))
-			throw new RuntimeException("Instance "+instance+" is not defined, or not available!");
+			throw new RuntimeException("Instance " + instance
+					+ " is not defined, or not available!");
 		return pdps.get(instance);
 	}
 
@@ -74,6 +77,20 @@ public class PDPserviceFactory {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Creates a Layer 2 object.
+	 */
+	public Object create(Object c) {
+		if (layer2BootStrapper == null) {
+			throw new RuntimeException("Cannot call create() before initialization of Layer 2!");
+		}
+		try {
+			return layer2BootStrapper.create(c);
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -94,8 +111,8 @@ public class PDPserviceFactory {
 
 	/**
 	 * Creates an empty new Response object. This function will create an object
-	 * of the Response interface of the loaded Layer 2 library, and add the single
-	 * Result that is passed in as a parameter.
+	 * of the Response interface of the loaded Layer 2 library, and add the
+	 * single Result that is passed in as a parameter.
 	 * 
 	 * @param result
 	 *            result
@@ -154,12 +171,12 @@ public class PDPserviceFactory {
 		try {
 			Class bootstrap = (Class<Request>) classLoader.loadClass(l2Impl
 					+ ".layer2Bootstrapper");
-			org.EzAz.Layer2.layer2Bootstrapper b = (org.EzAz.Layer2.layer2Bootstrapper) bootstrap
+			layer2BootStrapper = (org.EzAz.Layer2.layer2Bootstrapper) bootstrap
 					.newInstance();
-			attributeClass = b.classAttribute();
-			requestClass = b.classRequest();
-			responseClass = b.classResponse();
-			resultClass = b.classResult();
+			attributeClass = layer2BootStrapper.classAttribute();
+			requestClass = layer2BootStrapper.classRequest();
+			responseClass = layer2BootStrapper.classResponse();
+			resultClass = layer2BootStrapper.classResult();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -182,7 +199,7 @@ public class PDPserviceFactory {
 				String pdpName_tmp = s.substring(PREFIX_PDP.length());
 				String pdpName = pdpName_tmp.substring(0,
 						pdpName_tmp.indexOf("."));
-				//System.out.println("Found PDP Name: " + pdpName);
+				// System.out.println("Found PDP Name: " + pdpName);
 				Properties pdpProp;
 				if (!mm.containsKey(pdpName)) {
 					pdpProp = new Properties();
@@ -200,14 +217,16 @@ public class PDPserviceFactory {
 			Properties pp = mm.get(s);
 			System.out.println("PROPERTIES FOR: " + s + "\n" + pp.toString());
 			// Find the class of the driver
-			String driverClassProp=PREFIX_PDP+s+".driver";
-			System.out.println("Fetching driver: "+driverClassProp);
-			String driverClass=pp.getProperty(driverClassProp);
+			String driverClassProp = PREFIX_PDP + s + ".driver";
+			System.out.println("Fetching driver: " + driverClassProp);
+			String driverClass = pp.getProperty(driverClassProp);
 			if (driverClass != null) {
 				Class pdp;
 				try {
-					pdp = (Class<PDPService>) classLoader.loadClass(driverClass);
-					org.EzAz.Layer3.PDPService pdpService = (org.EzAz.Layer3.PDPService) pdp.newInstance();
+					pdp = (Class<PDPService>) classLoader
+							.loadClass(driverClass);
+					org.EzAz.Layer3.PDPService pdpService = (org.EzAz.Layer3.PDPService) pdp
+							.newInstance();
 					pdps.put(s, pdpService);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
@@ -220,7 +239,7 @@ public class PDPserviceFactory {
 					e.printStackTrace();
 				}
 			}
-			
+
 		}
 	}
 
