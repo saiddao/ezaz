@@ -81,7 +81,6 @@ public class Request1 {
 		try {
 			resp = pdp.evaluate(req);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}

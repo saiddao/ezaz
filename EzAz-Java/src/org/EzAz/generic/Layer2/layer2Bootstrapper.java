@@ -20,4 +20,29 @@ public class layer2Bootstrapper extends org.EzAz.Layer2.layer2Bootstrapper {
 	public Class classResult() {
 		return genericResult.class;
 	}
+
+	@Override
+	public Class classAttributeAssignment() {
+		return genericAttributeAssignment.class;
+	}
+
+	@Override
+	public Class classAttributeEntity() {
+		return genericAttributeEntity.class;
+	}
+
+	@Override
+	public Class classIdReference() {
+		return genericIdReference.class;
+	}
+
+	@Override
+	public Class classStatus() {
+		return genericStatus.class;
+	}
+
+	@Override
+	public Class classAdviceObligation() {
+		return genericAdviceObligation.class;
+	}
 }

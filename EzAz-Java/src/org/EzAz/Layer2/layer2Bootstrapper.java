@@ -25,36 +25,80 @@ public abstract class layer2Bootstrapper {
 
 	}
 
-	public void init(){
-
+	abstract public void init();
+	
+	public Object create(Object o) {
+		try {
+			if (o instanceof AdviceObligation)
+				return classAdviceObligation().newInstance();
+			else if (o instanceof Attribute)
+				return classAttribute().newInstance();
+			else if (o instanceof AttributeAssignment)
+				return classAttributeAssignment().newInstance();
+			else if (o instanceof AttributeEntity)
+				return classAttributeEntity().newInstance();
+			else if (o instanceof IdReference)
+				return classIdReference().newInstance();
+			else if (o instanceof Request)
+				return classRequest().newInstance();
+			else if (o instanceof Response)
+				return classResponse().newInstance();
+			else if (o instanceof Result)
+				return classResult().newInstance();
+			else if (o instanceof Status)
+				return classStatus().newInstance();
+			else
+				throw new RuntimeException ("Cannot instantiate unknown class: "+o.getClass().getName());
+		} catch (Exception e) {
+			throw new RuntimeException (e);
+		}
 	}
 
 	/**
 	 * Retrieves the Request class.
 	 */
-	public Class classRequest(){
-		return null;
-	}
+	abstract public Class classRequest();
 
 	/**
 	 * Retrieves the Attribute class.
 	 */
-	public Class classAttribute(){
-		return null;
-	}
+	abstract public Class classAttribute();
 
 	/**
 	 * Retrieves the Response class.
 	 */
-	public Class classResponse(){
-		return null;
-	}
+	abstract public Class classResponse();
 
 	/**
-	 * Retrieves the Response class.
+	 * Retrieves the Result class.
 	 */
-	public Class classResult(){
-		return null;
-	}
+	abstract public Class classResult();
+	
+	/**
+	 * Retrieves the AttributeAssignment class.
+	 */
+	abstract public Class classAttributeAssignment();
+
+	/**
+	 * Retrieves the AttributeEntity class.
+	 */
+	abstract public Class classAttributeEntity();
+
+	/**
+	 * Retrieves the IdReference class.
+	 */
+	abstract public Class classIdReference();
+
+	/**
+	 * Retrieves the Status class.
+	 */
+	abstract public Class classStatus();
+
+	/**
+	 * Retrieves the AdviceObligation class.
+	 */
+	abstract public Class classAdviceObligation();
+
+
 
 }
