@@ -36,13 +36,13 @@ public class DummyDriver extends AsyncEmulator {
 	@Override
 	public Response extendedOperation(String operation, Request request,
 			Object extendedContext) {
-		throw new genericLayer2RuntimeException("DummyDriver does not implement extendedOperation!");
+		throw new genericLayer2RuntimeException("AxiomaticsDriver does not implement extendedOperation!");
 	}
 
 	@Override
 	public Response extendedOperation(String operation, Request request,
 			Object extendedContext, Object appContext) {
-		throw new genericLayer2RuntimeException("DummyDriver does not implement extendedOperation!");
+		throw new genericLayer2RuntimeException("AxiomaticsDriver does not implement extendedOperation!");
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class DummyDriver extends AsyncEmulator {
 			Object extendedContext, Object appContext,
 			abstractSet<AdviceObligationHandler> adviceHandlers,
 			abstractSet<AdviceObligationHandler> obligationHandlers) {
-		throw new genericLayer2RuntimeException("DummyDriver does not implement extendedOperation!");
+		throw new genericLayer2RuntimeException("AxiomaticsDriver does not implement extendedOperation!");
 	}
 
 	@Override

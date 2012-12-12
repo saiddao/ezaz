@@ -1,15 +1,19 @@
 package org.EzAz.generic.Layer2;
 
 import org.EzAz.Layer2.AdviceObligation;
+import org.EzAz.Layer2.AttributeEntity;
 import org.EzAz.Layer2.IdReference;
+import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Result;
 import org.EzAz.Layer2.ResultSetter;
 import org.EzAz.Layer2.Status;
+import org.EzAz.Layer2.abstractMap;
 import org.EzAz.Layer2.abstractSet;
 
 public class genericResult implements Result, ResultSetter {
 
 	private abstractSet<AdviceObligation> associatedAdvice;
+	private abstractMap<Identifier,AttributeEntity> attributeEntities;
 	private int decision;
 	private abstractSet<AdviceObligation> obligations;
 	private abstractSet<IdReference> policyIdentifierList;
@@ -111,6 +115,17 @@ public class genericResult implements Result, ResultSetter {
 	public void setStatus(Status status) throws genericLayer2RuntimeException {
 		checkMutable();
 		this.status=status;
+	}
+
+	@Override
+	public abstractMap<Identifier, AttributeEntity> getCategoriesEntities() {
+		return attributeEntities;
+	}
+
+	@Override
+	public void setCategoriesEntities(
+			abstractMap<Identifier, AttributeEntity> attributeEntities) {
+		this.attributeEntities=attributeEntities;
 	}
 
 }

@@ -29,7 +29,7 @@ public interface AttributeHelper {
 	 * @param type    The data type of the attribute.
 	 * @param value    The attribute's value.
 	 */
-	public void addAttribute(Identifier category, Identifier id, String issuer, Identifier type, Object value);
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer, Identifier type, Object value);
 
 	/**
 	 * Add an attribute of type Boolean.
@@ -39,7 +39,7 @@ public interface AttributeHelper {
 	 * @param issuer    The issuer of the Attribute.
 	 * @param val    The attribute's Boolean value.
 	 */
-	public void addAttribute(Identifier category, Identifier id, String issuer, boolean val);
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer, boolean val);
 
 	/**
 	 * Add an attribute of type String.
@@ -49,7 +49,7 @@ public interface AttributeHelper {
 	 * @param issuer    The issuer of the Attribute.
 	 * @param val    The attribute's Integer value.
 	 */
-	public void addAttribute(Identifier category, Identifier id, String issuer, int val);
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer, int val);
 
 	/**
 	 * Add an attribute of type String.
@@ -59,7 +59,7 @@ public interface AttributeHelper {
 	 * @param issuer    The issuer of the Attribute.
 	 * @param val    The Attribute's String value.
 	 */
-	public void addAttribute(Identifier category, Identifier id, String issuer, String val);
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer, String val);
 
 	/**
 	 * Add an attribute.
@@ -67,7 +67,7 @@ public interface AttributeHelper {
 	 * @param category    The ID of the category.
 	 * @param attr    The Attribute to be added.
 	 */
-	public void addAttribute(Identifier category, Attribute attr);
+	public Attribute addAttribute(Identifier category, Attribute attr);
 
 	/**
 	 * Add an entire category using a list of Attributes.

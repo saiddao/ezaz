@@ -67,13 +67,13 @@ public class AxioRequest1 {
 		//h.addAttribute(AttributeEntity.CAT_SUBJECT,"subject-id", null, "jack");
 
 		h.addAttribute(AttributeEntity.CAT_ACTION,
-				Identifier.create("urn:oasis:names:tc:xacml:1.0:action:action-id"), null, "add");
+				Identifier.create("urn:oasis:names:tc:xacml:1.0:action:action-id"), null, "add").setIncludeInResult(true);
 		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("var1"), null, 3);
+				Identifier.create("var1"), null, 2).setIncludeInResult(true);
 		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("var2"), null, 42);
+				Identifier.create("var2"), null, 47).setIncludeInResult(true);
 		h.addAttribute(AttributeEntity.CAT_SUBJECT,
-				Identifier.create("urn:org:apache:tomcat:user-role"), null, "mathematician");
+				Identifier.create("urn:org:apache:tomcat:user-role"), null, "mathematician").setIncludeInResult(true);
 		
 		// Print out the request
 		genericLayer2Utils.prettyPrint(req);
@@ -86,7 +86,7 @@ public class AxioRequest1 {
 			e.printStackTrace();
 			return;
 		}
-		
+		genericLayer2Utils.prettyPrint(resp);
 		// Check whether the response allows our request.
 		System.out.println("IS ALLOWED? "+resp.isAllowed(false));
 	}

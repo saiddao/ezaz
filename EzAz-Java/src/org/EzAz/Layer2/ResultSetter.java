@@ -90,4 +90,7 @@ public interface ResultSetter {
 	 */
 	public void setStatus(Status status);
 
+	public void setCategoriesEntities(
+			abstractMap<Identifier, AttributeEntity> attributeEntities);
+
 }

@@ -83,7 +83,7 @@ public class genericRequest implements Request, AttributeHelper {
 	}
 	
 	@Override
-	public void addAttribute(Identifier category, Identifier id, String issuer,
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer,
 			Identifier type, Object value) {
 		genericAttribute attr = new genericAttribute();
 		attr.setId(id);
@@ -91,10 +91,11 @@ public class genericRequest implements Request, AttributeHelper {
 		attr.setType(type);
 		attr.setValue(value);
 		addAttribute(category, attr);
+		return attr;
 	}
 
 	@Override
-	public void addAttribute(Identifier category, Identifier id, String issuer,
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer,
 			boolean val) {
 		genericAttribute attr = new genericAttribute();
 		attr.setId(id);
@@ -102,10 +103,11 @@ public class genericRequest implements Request, AttributeHelper {
 		attr.setType (Attribute.TYPE_BOOLEAN);
 		attr.setValue(new Boolean(val));
 		addAttribute(category, attr);
+		return attr;
 	}
 
 	@Override
-	public void addAttribute(Identifier category, Identifier id, String issuer,
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer,
 			int val) {
 		genericAttribute attr = new genericAttribute();
 		attr.setId(id);
@@ -113,10 +115,11 @@ public class genericRequest implements Request, AttributeHelper {
 		attr.setType (Attribute.TYPE_INTEGER);
 		attr.setValue(new Integer(val));
 		addAttribute(category, attr);
+		return attr;
 	}
 
 	@Override
-	public void addAttribute(Identifier category, Identifier id, String issuer,
+	public Attribute addAttribute(Identifier category, Identifier id, String issuer,
 			String val) {
 		genericAttribute attr = new genericAttribute();
 		attr.setId(id);
@@ -124,10 +127,11 @@ public class genericRequest implements Request, AttributeHelper {
 		attr.setType(Attribute.TYPE_STRING);
 		attr.setValue(new String(val));
 		addAttribute(category, attr);
+		return attr;
 	}
 
 	@Override
-	public void addAttribute(Identifier category, Attribute attr) throws genericLayer2RuntimeException {
+	public Attribute addAttribute(Identifier category, Attribute attr) throws genericLayer2RuntimeException {
 		checkMutable();
 		abstractMap<Identifier,AttributeEntity> entities = getCategoriesEntities();
 		AttributeEntity entity = entities.get(category);
@@ -142,6 +146,7 @@ public class genericRequest implements Request, AttributeHelper {
 			abstractSet<Attribute> attrs = entity.getAttributes();
 			attrs.add(attr);
 		}
+		return attr;
 	}
 
 	@Override

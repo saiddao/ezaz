@@ -64,6 +64,8 @@ public class Request1 {
 		AttributeHelper h=(AttributeHelper)req;
 
 		// Now create attributes on the request.
+		//h.addAttribute(AttributeEntity.CAT_SUBJECT,"subject-id", null, "jack");
+
 		h.addAttribute(AttributeEntity.CAT_SUBJECT,
 				Identifier.create("subject-id"), null, "jack");
 		h.addAttribute(AttributeEntity.CAT_ACTION,

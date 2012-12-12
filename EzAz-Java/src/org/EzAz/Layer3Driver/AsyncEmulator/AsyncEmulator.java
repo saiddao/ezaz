@@ -19,7 +19,7 @@ public class AsyncEmulator extends PDPService {
 
 	// Synchronously calls evaluate, stores the result, and then gives back a handle.
 	@Override
-	public operationHandle asyncEvaluate(Request request) {
+	public operationHandle asyncEvaluate(Request request) throws Exception {
 		request.setImmutable();
 		Response resp=evaluate(request);
 		AsyncEmulatorOperationHandle handle=new AsyncEmulatorOperationHandle();
@@ -31,7 +31,7 @@ public class AsyncEmulator extends PDPService {
 
 	@Override
 	public operationHandle asyncEvaluate(Request request,
-			AsyncResultListener listener) {
+			AsyncResultListener listener) throws Exception {
 		AsyncEmulatorOperationHandle handle=
 			(AsyncEmulatorOperationHandle) asyncEvaluate(request);
 		listener.onComplete(handle, request, handle.resp, null, null);
@@ -41,7 +41,7 @@ public class AsyncEmulator extends PDPService {
 	@Override
 	public operationHandle asyncExtendedOperation(String operation,
 			Request request, Object extendedContext,
-			AsyncResultListener listener) {
+			AsyncResultListener listener) throws Exception {
 		request.setImmutable();
 		Response resp=extendedOperation(operation, request, extendedContext);
 		AsyncEmulatorOperationHandle handle=new AsyncEmulatorOperationHandle();
@@ -61,31 +61,31 @@ public class AsyncEmulator extends PDPService {
 	}
 
 	@Override
-	public Response evaluate(Request request) {
+	public Response evaluate(Request request) throws Exception {
 		return evaluate(request, null, null, null);
 	}
 
 	@Override
-	public Response evaluate(Request request, Object appContext) {
+	public Response evaluate(Request request, Object appContext) throws Exception {
 		return evaluate(request, null, null, null);
 	}
 
 	@Override
 	public Response evaluate(Request request, Object appContext,
 			abstractSet<AdviceObligationHandler> obligationHandlers,
-			abstractSet<AdviceObligationHandler> adviceListeners) {
+			abstractSet<AdviceObligationHandler> adviceListeners) throws Exception {
 		throw new RuntimeException ("AsyncEmulator doesn't provide an evaluate() function!");
 	}
 
 	@Override
 	public Response extendedOperation(String operation, Request request,
-			Object extendedContext) {
+			Object extendedContext) throws Exception {
 		return extendedOperation(operation, request, null, null, null, null);
 	}
 
 	@Override
 	public Response extendedOperation(String operation, Request request,
-			Object extendedContext, Object appContext) {
+			Object extendedContext, Object appContext) throws Exception {
 		return extendedOperation(operation, request, null, null, null, null);
 	}
 
@@ -93,7 +93,7 @@ public class AsyncEmulator extends PDPService {
 	public Response extendedOperation(String operation, Request request,
 			Object extendedContext, Object appContext,
 			abstractSet<AdviceObligationHandler> adviceHandlers,
-			abstractSet<AdviceObligationHandler> obligationHandlers) {
+			abstractSet<AdviceObligationHandler> obligationHandlers) throws Exception {
 		throw new RuntimeException ("AsyncEmulator doesn't provide an extendedOperation() function!");
 	}
 

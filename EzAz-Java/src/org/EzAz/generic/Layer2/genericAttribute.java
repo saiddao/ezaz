@@ -8,9 +8,10 @@ import org.EzAz.Layer2.Identifier;
 
 public class genericAttribute implements Attribute {
 
-	Identifier id, type;
-	String issuer;
-	Object value;
+	private Identifier id, type;
+	private String issuer;
+	private Object value;
+	private boolean includeInResult=false;
 	
 	@Override
 	public Identifier getId() {
@@ -66,6 +67,16 @@ public class genericAttribute implements Attribute {
 	@Override
 	public void setValue(Object value) {
 		this.value = value;
+	}
+
+	@Override
+	public void setIncludeInResult(boolean includeInResult) {
+		this.includeInResult=includeInResult;
+	}
+
+	@Override
+	public boolean getIncludeInResult() {
+		return includeInResult;
 	}
 
 }

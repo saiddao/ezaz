@@ -16,21 +16,23 @@ import java.util.Properties;
 
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.Response;
+import org.EzAz.Layer2.abstractSet;
 import org.EzAz.AdviceObligationHandlers.AdviceObligationHandler;
 import org.EzAz.Layer2.Identifier;
 import org.EzAz.AdviceObligationHandlers.AdviceObligationHandlerRegistryEntry;
 import org.EzAz.AdviceObligationHandlers.AdviceObligationHandlerRegistry;
-import org.EzAz.Layer2.abstractSet;
-import org.EzAz.Layer3.AsyncResultListener;
-import org.EzAz.Layer3.operationHandle;
 
 /**
  * An interface for the connection to the PDP.
  * @author felix
  * @version 1.0
- * @created 05-Dec-2012 00:03:53
+ * @created 12-Dec-2012 22:54:49
  */
 public abstract class PDPService implements AdviceObligationHandlerRegistry {
+
+	public PDPService(){
+
+	}
 
 	/**
 	 * An asynchronous way to send an evaluate request to a PDP. Returns an
@@ -38,10 +40,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * @return An operationHandle that can be used to track the execution
 	 * 
 	 * @param request    The actual XACML request
-	 * @exception EnforcerException EnforcerException
 	 */
-	public abstract operationHandle asyncEvaluate(Request request)
-	  throws Exception;
+	public abstract operationHandle asyncEvaluate(Request request) throws Exception;
 
 	/**
 	 * An asynchronous way to send an evaluate request to a PDP. Returns an
@@ -51,10 +51,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * 
 	 * @param request    The actual XACML request
 	 * @param listener    that will get notified when the operation completes
-	 * @exception EnforcerException EnforcerException
 	 */
-	public abstract operationHandle asyncEvaluate(Request request, AsyncResultListener listener)
-	  throws Exception;
+	public abstract operationHandle asyncEvaluate(Request request, AsyncResultListener listener) throws Exception;
 
 	/**
 	 * The asynchronous way to send an extended operation to a PDP. Returns an
@@ -68,10 +66,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * extended operation.
 	 * @param listener    A listener that will get notified when the operation
 	 * completes.
-	 * @exception EnforcerException EnforcerException
 	 */
-	public abstract operationHandle asyncExtendedOperation(String operation, Request request, Object extendedContext, AsyncResultListener listener)
-	  throws Exception;
+	public abstract operationHandle asyncExtendedOperation(String operation, Request request, Object extendedContext, AsyncResultListener listener) throws Exception;
 
 	/**
 	 * Cancels a request that is already in process. <b>This may or may not be
@@ -79,10 +75,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * </b>
 	 * 
 	 * @param opHandle    opHandle
-	 * @exception Exception
 	 */
-	public abstract void cancel(operationHandle opHandle)
-	  throws Exception;
+	public abstract void cancel(operationHandle opHandle);
 
 	/**
 	 * Sends the request to the PDP for evaluation. Simplest synchronous operation
@@ -90,8 +84,7 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * 
 	 * @param request    The Request Object.
 	 */
-	public abstract Response evaluate(Request request)
-	  throws Exception;
+	public abstract Response evaluate(Request request) throws Exception;
 
 	/**
 	 * Sends the request to the PDP for evaluation in synchronous mode. Allows to
@@ -102,10 +95,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * @param appContext    An application specific Object that is passed to every
 	 * Advice/Obligation Handler that gets called when the response is received. May
 	 * be null.
-	 * @exception Exception
 	 */
-	public abstract Response evaluate(Request request, Object appContext)
-	  throws Exception;
+	public abstract Response evaluate(Request request, Object appContext) throws Exception;
 
 	/**
 	 * Sends the request to the PDP for evaluation in synchronous mode. Allows to
@@ -121,10 +112,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * be null.
 	 * @param obligationHandlers    A list of Obligation Handlers.
 	 * @param adviceListeners    A list of Advice Handlers.
-	 * @exception Exception
 	 */
-	public abstract Response evaluate(Request request, Object appContext, abstractSet<AdviceObligationHandler> obligationHandlers, abstractSet<AdviceObligationHandler> adviceListeners)
-	  throws Exception;
+	public abstract Response evaluate(Request request, Object appContext, abstractSet<AdviceObligationHandler> obligationHandlers, abstractSet<AdviceObligationHandler> adviceListeners) throws Exception;
 
 	/**
 	 * Sends an extended operation to a PDP. Extended operations can be used to
@@ -141,10 +130,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * @param request    The Request object.
 	 * @param extendedContext    An Object that contains additional information about
 	 * the extended request. May be null.
-	 * @exception EnforcerException ;
 	 */
-	public abstract Response extendedOperation(String operation, Request request, Object extendedContext)
-	  throws Exception;
+	public abstract Response extendedOperation(String operation, Request request, Object extendedContext) throws Exception;
 
 	/**
 	 * Sends an extended operation to a PDP. Extended operations can be used to
@@ -165,10 +152,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * @param appContext    An application specific Object that is passed to every
 	 * Advice/Obligation Handler that gets called when the response is received. May
 	 * be null.
-	 * @exception Exception
 	 */
-	public abstract Response extendedOperation(String operation, Request request, Object extendedContext, Object appContext)
-	  throws Exception;
+	public abstract Response extendedOperation(String operation, Request request, Object extendedContext, Object appContext) throws Exception;
 
 	/**
 	 * Sends an extended operation to a PDP. Extended operations can be used to
@@ -193,10 +178,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * Advice on the Results of this operation only. May be null.
 	 * @param obligationHandlers    A List of Handlers that will get called for every
 	 * Obligation on the Results of this operation only. May be null.
-	 * @exception Exception
 	 */
-	public abstract Response extendedOperation(String operation, Request request, Object extendedContext, Object appContext, abstractSet<AdviceObligationHandler> adviceHandlers, abstractSet<AdviceObligationHandler> obligationHandlers)
-	  throws Exception;
+	public abstract Response extendedOperation(String operation, Request request, Object extendedContext, Object appContext, abstractSet<AdviceObligationHandler> adviceHandlers, abstractSet<AdviceObligationHandler> obligationHandlers) throws Exception;
 
 	/**
 	 * Returns a boolean indicating whether a particular operation has completed. If
@@ -204,10 +187,8 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * deliver an immediate result.
 	 * 
 	 * @param opHandle    opHandle
-	 * @exception Exception
 	 */
-	public abstract boolean isDone(operationHandle opHandle)
-	  throws Exception;
+	public abstract boolean isDone(operationHandle opHandle);
 
 	/**
 	 * Sets up the connection to a policy decision point (PDP). This method will be
@@ -215,19 +196,15 @@ public abstract class PDPService implements AdviceObligationHandlerRegistry {
 	 * singleton client stub.
 	 * 
 	 * @param properties    Properties containing the connection parameters
-	 * @exception EnforcerException EnforcerException
 	 */
-	public abstract void setupConnection(Properties properties)
-	  throws Exception;
+	public abstract void setupConnection(Properties properties);
 
 	/**
 	 * Waits on the current operation handle and returns the Response received.
 	 * 
 	 * @param opHandle    opHandle
-	 * @exception Exception
 	 */
-	public abstract Response waitOn(operationHandle opHandle)
-	  throws Exception;
+	public abstract Response waitOn(operationHandle opHandle) throws Exception;
 
 	/**
 	 * Adds a handler to the Registry.

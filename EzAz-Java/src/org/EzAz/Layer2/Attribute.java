@@ -16,7 +16,7 @@ package org.EzAz.Layer2;
 /**
  * @author felix
  * @version 1.0
- * @created 12-Dec-2012 22:54:48
+ * @created 12-Dec-2012 23:53:39
  */
 public interface Attribute {
 
@@ -92,5 +92,21 @@ public interface Attribute {
 	 * @param value    The attribute value.
 	 */
 	public void setValue(Object value);
+
+	/**
+	 * If this attribute belongs to a Request, the flag indicates whether the result
+	 * returned by the PDP shall include this attribute (i.e. whether the result
+	 * should have a copy of this attribute attached to it). If this attribute belongs
+	 * to a Result, then this flag is set (because it was set in the attribute that
+	 * was attached to the Request).
+	 * 
+	 * @param includeInResult
+	 */
+	public void setIncludeInResult(boolean includeInResult);
+
+	/**
+	 * Returns the getIncludeInResult flag. See setIncludeInResult().
+	 */
+	public boolean getIncludeInResult();
 
 }

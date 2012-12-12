@@ -16,7 +16,7 @@ package org.EzAz.Layer2;
 /**
  * @author felix
  * @version 1.0
- * @created 05-Dec-2012 00:00:58
+ * @created 12-Dec-2012 22:54:49
  */
 @SuppressWarnings("rawtypes")
 public abstract class layer2Bootstrapper {
@@ -25,9 +25,31 @@ public abstract class layer2Bootstrapper {
 
 	}
 
-	abstract public void init();
-	
-	public Object create(Object o) {
+	public void init(){
+
+	}
+
+	/**
+	 * Retrieves the Request class.
+	 */
+	abstract public Class classRequest();
+
+	/**
+	 * Retrieves the Attribute class.
+	 */
+	abstract public Class classAttribute();
+
+	/**
+	 * Retrieves the Response class.
+	 */
+	abstract public Class classResponse();
+
+	/**
+	 * Retrieves the Response class.
+	 */
+	abstract public Class classResult();
+
+	public Object create(Object o) throws Exception {
 		try {
 			if (o instanceof AdviceObligation)
 				return classAdviceObligation().newInstance();
@@ -50,55 +72,18 @@ public abstract class layer2Bootstrapper {
 			else
 				throw new RuntimeException ("Cannot instantiate unknown class: "+o.getClass().getName());
 		} catch (Exception e) {
-			throw new RuntimeException (e);
+			throw new RuntimeException(e);
 		}
 	}
-
-	/**
-	 * Retrieves the Request class.
-	 */
-	abstract public Class classRequest();
-
-	/**
-	 * Retrieves the Attribute class.
-	 */
-	abstract public Class classAttribute();
-
-	/**
-	 * Retrieves the Response class.
-	 */
-	abstract public Class classResponse();
-
-	/**
-	 * Retrieves the Result class.
-	 */
-	abstract public Class classResult();
 	
-	/**
-	 * Retrieves the AttributeAssignment class.
-	 */
 	abstract public Class classAttributeAssignment();
 
-	/**
-	 * Retrieves the AttributeEntity class.
-	 */
 	abstract public Class classAttributeEntity();
 
-	/**
-	 * Retrieves the IdReference class.
-	 */
 	abstract public Class classIdReference();
 
-	/**
-	 * Retrieves the Status class.
-	 */
 	abstract public Class classStatus();
 
-	/**
-	 * Retrieves the AdviceObligation class.
-	 */
 	abstract public Class classAdviceObligation();
-
-
 
 }
