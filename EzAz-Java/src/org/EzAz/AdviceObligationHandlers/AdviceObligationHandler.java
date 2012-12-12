@@ -19,7 +19,7 @@ import org.EzAz.Layer2.AdviceObligation;
 /**
  * @author felix
  * @version 1.0
- * @created 05-Dec-2012 00:00:57
+ * @created 12-Dec-2012 22:54:48
  */
 public interface AdviceObligationHandler {
 

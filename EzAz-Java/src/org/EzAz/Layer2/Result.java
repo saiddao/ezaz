@@ -16,7 +16,7 @@ package org.EzAz.Layer2;
 /**
  * @author felix
  * @version 1.0
- * @created 05-Dec-2012 00:00:58
+ * @created 12-Dec-2012 22:54:49
  */
 public interface Result {
 
@@ -73,5 +73,12 @@ public interface Result {
 	 * @param bias    bias
 	 */
 	public boolean isAllowed(boolean bias);
+
+	/**
+	 * Retrieves the AttributeEntities (i.e. Attribute Categories with Attributes)
+	 * that may be attached to the Result. This will happen when the IncludeInResults
+	 * flag has been set on an attribute.
+	 */
+	public abstractMap<Identifier,AttributeEntity> getCategoriesEntities();
 
 }

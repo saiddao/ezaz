@@ -16,7 +16,7 @@ package org.EzAz.Layer2;
 /**
  * @author felix
  * @version 1.0
- * @created 07-Dec-2012 17:18:18
+ * @created 12-Dec-2012 22:54:49
  */
 public interface AttributeHelper {
 

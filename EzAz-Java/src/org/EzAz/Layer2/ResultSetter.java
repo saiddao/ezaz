@@ -18,7 +18,7 @@ package org.EzAz.Layer2;
  * construct a result that corresponds to a request issued by Layer 2 users.
  * @author felix
  * @version 1.0
- * @created 05-Dec-2012 00:00:58
+ * @created 12-Dec-2012 22:54:49
  */
 public interface ResultSetter {
 
