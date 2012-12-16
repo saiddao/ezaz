@@ -38,7 +38,7 @@ public class AxioRequest1 {
 	public void loadProps() {
 		Properties prop=new Properties();
 		// Load properties
-		InputStream propFile = this.getClass().getClassLoader().getResourceAsStream("org/EzAz/examples/simpleRequest/axio.properties");
+		InputStream propFile = this.getClass().getClassLoader().getResourceAsStream("org/EzAz/examples/simpleRequest/sdk.properties");
         try {
         	prop.load(propFile);
         	PDPserviceFactory.initSDK(prop);
