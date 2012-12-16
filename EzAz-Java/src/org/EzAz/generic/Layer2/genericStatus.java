@@ -42,6 +42,8 @@ public class genericStatus implements Status, StatusSetter {
 	}
 
 	public static void prettyPrint(PrintStream ps, String header, Status status) {
+		if (status == null)
+			return;
 		String tmp=status.getStatusCode();
 		ps.println(header+"STATUS CODE: "+(tmp != null? tmp : ""));
 		tmp=status.getStatusDetail();
