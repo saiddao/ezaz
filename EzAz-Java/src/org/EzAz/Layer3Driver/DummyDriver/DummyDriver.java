@@ -3,6 +3,7 @@ package org.EzAz.Layer3Driver.DummyDriver;
 import java.util.Properties;
 
 import org.EzAz.AdviceObligationHandlers.AdviceObligationHandler;
+import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.Response;
 import org.EzAz.Layer2.Result;
@@ -11,6 +12,7 @@ import org.EzAz.Layer3Driver.AsyncEmulator.AsyncEmulator;
 import org.EzAz.generic.Layer2.genericLayer2RuntimeException;
 import org.EzAz.generic.Layer2.genericResponse;
 import org.EzAz.generic.Layer2.genericResult;
+import org.EzAz.generic.Layer2.genericStatus;
 
 public class DummyDriver extends AsyncEmulator {
 
@@ -24,6 +26,11 @@ public class DummyDriver extends AsyncEmulator {
 		genericResponse resp=new genericResponse();
 		genericResult result=new genericResult();
 		result.setDecision(Result.RESULT_PERMIT);
+		// Create status
+		genericStatus status=new genericStatus();
+		status.setStatusCode("urn:oasis:names:tc:xacml:1.0:status:ok");
+		status.setStatusMessage("OK");
+		result.setStatus(status);
 		resp.addResult(result);
 		return resp;
 	}
