@@ -1,0 +1,39 @@
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+   <S:Body>
+      <ns13:InstanceAccessQuery3Response xmlns:ns2="http://axiomatics.com/delegent/pdpsimple/v1/GetVersion" xmlns:ns3="http://axiomatics.com/delegent/pdpsimple/v1/InvalidateAttributeCache" xmlns:ns4="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTestAccessQuery3" xmlns:ns5="http://axiomatics.com/delegent/pdpsimple/v1/GetUpdates" xmlns:ns6="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceAccessQuery3" xmlns:ns7="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceAccessQuery2" xmlns:ns8="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:ns9="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTestAccessQuery2" xmlns:ns10="urn:oasis:names:tc:xacml:2.0:policy:schema:os" xmlns:ns11="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceTestAccessQuery2" xmlns:ns12="urn:oasis:names:tc:xacml:2.0:context:schema:os" xmlns:ns13="http://axiomatics.com/delegent/pdpsimple/v1/InstanceAccessQuery3" xmlns:ns14="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceTestAccessQuery3" xmlns:ns15="http://axiomatics.com/delegent/pdpsimple/v1/InstanceAccessQuery2" xmlns:ns16="http://axiomatics.com/delegent/pdpsimple/v1/faults">
+         <xacml-ctx:Response xmlns:xacml-ctx="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17">
+            <xacml-ctx:Result>
+               <xacml-ctx:Decision>Deny</xacml-ctx:Decision>
+               <xacml-ctx:Status>
+                  <xacml-ctx:StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+               </xacml-ctx:Status>
+               <xacml-ctx:AssociatedAdvice>
+                  <xacml-ctx:Advice AdviceId="give-reason">
+                     <xacml-ctx:AttributeAssignment AttributeId="var1" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#integer" Issuer="">13</xacml-ctx:AttributeAssignment>
+                     <xacml-ctx:AttributeAssignment AttributeId="var2" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" DataType="http://www.w3.org/2001/XMLSchema#integer" Issuer="">6</xacml-ctx:AttributeAssignment>
+                     <xacml-ctx:AttributeAssignment AttributeId="message" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" DataType="http://www.w3.org/2001/XMLSchema#string" Issuer="">please don't use 13</xacml-ctx:AttributeAssignment>
+                  </xacml-ctx:Advice>
+               </xacml-ctx:AssociatedAdvice>
+               <xacml-ctx:Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource">
+                  <xacml-ctx:Attribute AttributeId="var1" IncludeInResult="true">
+                     <xacml-ctx:AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">13</xacml-ctx:AttributeValue>
+                  </xacml-ctx:Attribute>
+                  <xacml-ctx:Attribute AttributeId="var2" IncludeInResult="true">
+                     <xacml-ctx:AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">6</xacml-ctx:AttributeValue>
+                  </xacml-ctx:Attribute>
+               </xacml-ctx:Attributes>
+               <xacml-ctx:Attributes Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject">
+                  <xacml-ctx:Attribute AttributeId="urn:org:apache:tomcat:user-role" IncludeInResult="true">
+                     <xacml-ctx:AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">mathematician</xacml-ctx:AttributeValue>
+                  </xacml-ctx:Attribute>
+               </xacml-ctx:Attributes>
+               <xacml-ctx:Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+                  <xacml-ctx:Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+                     <xacml-ctx:AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">add</xacml-ctx:AttributeValue>
+                  </xacml-ctx:Attribute>
+               </xacml-ctx:Attributes>
+            </xacml-ctx:Result>
+         </xacml-ctx:Response>
+      </ns13:InstanceAccessQuery3Response>
+   </S:Body>
+</S:Envelope>
