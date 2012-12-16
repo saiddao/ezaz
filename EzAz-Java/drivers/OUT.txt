@@ -1,0 +1,57 @@
+parsing WSDL...
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[ERROR] ec2-107-21-184-245.compute-1.amazonaws.com
+
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 10 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema2
+
+[WARNING] src-resolve: Cannot resolve the name 'xacml2-context:Response' to a(n) 'element declaration' component.
+  line 16 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema2
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 31 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema3
+
+[WARNING] src-resolve: Cannot resolve the name 'xacml3:Response' to a(n) 'element declaration' component.
+  line 37 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema3
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 52 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema4
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 81 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema5
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 110 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema6
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 139 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema7
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 168 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema8
+
+[WARNING] schema_reference.4: Failed to read schema document 'http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3', because 1) could not find the document; 2) the document could not be read; 3) the root element of the document is not <xsd:schema>.
+  line 205 of file:/C:/Users/felix/workspace/EzAz-Java/drivers/DelegentPDP.xml#types?schema9
+

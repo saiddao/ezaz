@@ -1,0 +1,659 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1 (branches/2.1-6728; 2011-02-03T14:14:58+0000) JAXWS-RI/2.2.3 JAXWS/2.2. --><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://axiomatics.com/delegent/pdpsimple/v1" xmlns:faults="http://axiomatics.com/delegent/pdpsimple/v1/faults" xmlns:ircap2="http://axiomatics.com/delegent/pdpsimple/v1/InstanceAccessQuery2" xmlns:itrcap2="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceAccessQuery2" xmlns:itestq2="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTestAccessQuery2" xmlns:itrtestq2="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceTestAccessQuery2" xmlns:ircap3="http://axiomatics.com/delegent/pdpsimple/v1/InstanceAccessQuery3" xmlns:itrcap3="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceAccessQuery3" xmlns:itestq3="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTestAccessQuery3" xmlns:itrtestq3="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceTestAccessQuery3" xmlns:gu="http://axiomatics.com/delegent/pdpsimple/v1/GetUpdates" xmlns:gv="http://axiomatics.com/delegent/pdpsimple/v1/GetVersion" xmlns:ivac="http://axiomatics.com/delegent/pdpsimple/v1/InvalidateAttributeCache" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdl-soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xacml3="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" xmlns:xacml2ctx="urn:oasis:names:tc:xacml:2.0:context:schema:os" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1" name="DelegentPDP">
+
+	<wsdl:types>
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/faults">
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+		</xsd:schema>
+
+		<xsd:schema xmlns:xacml2-context="urn:oasis:names:tc:xacml:2.0:context:schema:os" elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceAccessQuery2">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:context:schema:os" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceAccessQuery2Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml2-context:Response" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceAccessQuery2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml2-context:Request" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceAccessQuery3">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceAccessQuery3Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml3:Response" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceAccessQuery3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml3:Request" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+		<xsd:schema xmlns:xacml2-context="urn:oasis:names:tc:xacml:2.0:context:schema:os" elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTestAccessQuery2">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:context:schema:os" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceTestAccessQuery2Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml2-context:Response" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceTestAccessQuery2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml2-context:Request" />
+						<xsd:element name="Store" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="StoreId" type="xsd:string" />
+									<xsd:element name="StoreVersion" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTestAccessQuery3">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceTestAccessQuery3Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml3:Response" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceTestAccessQuery3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml3:Request" />
+						<xsd:element name="Store" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="StoreId" type="xsd:string" />
+									<xsd:element name="StoreVersion" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+		<xsd:schema xmlns:xacml2-context="urn:oasis:names:tc:xacml:2.0:context:schema:os" elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceAccessQuery2">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:context:schema:os" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceTraceAccessQuery2Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml2-context:Response" />
+						<xsd:element name="Trace">
+							<!-- The schema for this will be defined later -->
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:any processContents="skip" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceTraceAccessQuery2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml2-context:Request" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceAccessQuery3">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceTraceAccessQuery3Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml3:Response" />
+						<xsd:element name="Trace">
+							<!-- The schema for this will be defined later -->
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:any processContents="skip" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceTraceAccessQuery3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml3:Request" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+		<xsd:schema xmlns:xacml2-context="urn:oasis:names:tc:xacml:2.0:context:schema:os" elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceTestAccessQuery2">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:2.0:context:schema:os" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=1" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceTraceTestAccessQuery2Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml2-context:Response" />
+						<xsd:element name="Trace">
+							<!-- The schema for this will be defined later -->
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:any processContents="skip" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceTraceTestAccessQuery2">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml2-context:Request" />
+						<xsd:element name="Store" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="StoreId" type="xsd:string" />
+									<xsd:element name="StoreVersion" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+		
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InstanceTraceTestAccessQuery3">
+			<xsd:import namespace="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" schemaLocation="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP?xsd=3" />
+
+			<xsd:element name="PDPFault" type="xsd:string" />
+			<xsd:element name="InstanceTraceTestAccessQuery3Response">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="xacml3:Response" />
+						<xsd:element name="Trace">
+							<!-- The schema for this will be defined later -->
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:any processContents="skip" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="InstanceTraceTestAccessQuery3">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="InstanceId" type="xsd:string" />
+						<xsd:element ref="xacml3:Request" />
+						<xsd:element name="Store" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="StoreId" type="xsd:string" />
+									<xsd:element name="StoreVersion" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+		
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/GetUpdates">
+
+			<xsd:element name="GetUpdatesResponse">
+				<xsd:complexType>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetUpdates">
+				<xsd:complexType>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/GetVersion">
+
+			<xsd:element name="GetVersionResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Version" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetVersion">
+				<xsd:complexType>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://axiomatics.com/delegent/pdpsimple/v1/InvalidateAttributeCache">
+
+            <xsd:element name="InvalidateAttributeCacheResponse">
+                <xsd:complexType>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="InvalidateAttributeCache">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="ModuleParameter" minOccurs="0" maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="ModuleId" type="xsd:string" />
+                                    <xsd:element name="Parameter" type="xsd:string" />
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="InstanceAccessQuery2Request">
+		<wsdl:part name="InstanceAccessQuery2Request" element="ircap2:InstanceAccessQuery2" />
+	</wsdl:message>
+	<wsdl:message name="InstanceAccessQuery2Response">
+		<wsdl:part name="InstanceAccessQuery2Response" element="ircap2:InstanceAccessQuery2Response" />
+	</wsdl:message>
+	<wsdl:message name="InstanceAccessQuery3Request">
+		<wsdl:part name="InstanceAccessQuery3Request" element="ircap3:InstanceAccessQuery3" />
+	</wsdl:message>
+	<wsdl:message name="InstanceAccessQuery3Response">
+		<wsdl:part name="InstanceAccessQuery3Response" element="ircap3:InstanceAccessQuery3Response" />
+	</wsdl:message>
+
+	<wsdl:message name="InstanceTestAccessQuery2Request">
+		<wsdl:part name="InstanceTestAccessQuery2Request" element="itestq2:InstanceTestAccessQuery2" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTestAccessQuery2Response">
+		<wsdl:part name="InstanceTestAccessQuery2Response" element="itestq2:InstanceTestAccessQuery2Response" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTestAccessQuery3Request">
+		<wsdl:part name="InstanceTestAccessQuery3Request" element="itestq3:InstanceTestAccessQuery3" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTestAccessQuery3Response">
+		<wsdl:part name="InstanceTestAccessQuery3Response" element="itestq3:InstanceTestAccessQuery3Response" />
+	</wsdl:message>
+
+	<wsdl:message name="InstanceTraceAccessQuery2Request">
+		<wsdl:part name="InstanceTraceAccessQuery2Request" element="itrcap2:InstanceTraceAccessQuery2" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTraceAccessQuery2Response">
+		<wsdl:part name="InstanceTraceAccessQuery2Response" element="itrcap2:InstanceTraceAccessQuery2Response" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTraceAccessQuery3Request">
+		<wsdl:part name="InstanceTraceAccessQuery3Request" element="itrcap3:InstanceTraceAccessQuery3" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTraceAccessQuery3Response">
+		<wsdl:part name="InstanceTraceAccessQuery3Response" element="itrcap3:InstanceTraceAccessQuery3Response" />
+	</wsdl:message>
+	
+	<wsdl:message name="InstanceTraceTestAccessQuery2Request">
+		<wsdl:part name="InstanceTraceTestAccessQuery2Request" element="itrtestq2:InstanceTraceTestAccessQuery2" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTraceTestAccessQuery2Response">
+		<wsdl:part name="InstanceTraceTestAccessQuery2Response" element="itrtestq2:InstanceTraceTestAccessQuery2Response" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTraceTestAccessQuery3Request">
+		<wsdl:part name="InstanceTraceTestAccessQuery3Request" element="itrtestq3:InstanceTraceTestAccessQuery3" />
+	</wsdl:message>
+	<wsdl:message name="InstanceTraceTestAccessQuery3Response">
+		<wsdl:part name="InstanceTraceTestAccessQuery3Response" element="itrtestq3:InstanceTraceTestAccessQuery3Response" />
+	</wsdl:message>
+	
+	<wsdl:message name="GetUpdatesRequest">
+		<wsdl:part name="GetUpdatesRequest" element="gu:GetUpdates" />
+	</wsdl:message>
+	<wsdl:message name="GetUpdatesResponse">
+		<wsdl:part name="GetUpdatesResponse" element="gu:GetUpdatesResponse" />
+	</wsdl:message>
+
+	<wsdl:message name="GetVersionRequest">
+		<wsdl:part name="GetVersionRequest" element="gv:GetVersion" />
+	</wsdl:message>
+	<wsdl:message name="GetVersionResponse">
+		<wsdl:part name="GetVersionResponse" element="gv:GetVersionResponse" />
+	</wsdl:message>
+
+    <wsdl:message name="InvalidateAttributeCacheRequest">
+        <wsdl:part name="InvalidateAttributeCacheRequest" element="ivac:InvalidateAttributeCache" />
+    </wsdl:message>
+    <wsdl:message name="InvalidateAttributeCacheResponse">
+        <wsdl:part name="InvalidateAttributeCacheResponse" element="ivac:InvalidateAttributeCacheResponse" />
+    </wsdl:message>
+
+	<wsdl:message name="PDPFault">
+		<wsdl:part name="fault" element="faults:PDPFault" />
+	</wsdl:message>
+
+	<wsdl:portType name="DelegentPDPPortType">
+		<wsdl:operation name="InstanceAccessQuery2">
+			<wsdl:input message="tns:InstanceAccessQuery2Request" />
+			<wsdl:output message="tns:InstanceAccessQuery2Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="InstanceAccessQuery3">
+			<wsdl:input message="tns:InstanceAccessQuery3Request" />
+			<wsdl:output message="tns:InstanceAccessQuery3Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTestAccessQuery2">
+			<wsdl:input message="tns:InstanceTestAccessQuery2Request" />
+			<wsdl:output message="tns:InstanceTestAccessQuery2Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTestAccessQuery3">
+			<wsdl:input message="tns:InstanceTestAccessQuery3Request" />
+			<wsdl:output message="tns:InstanceTestAccessQuery3Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceAccessQuery2">
+			<wsdl:input message="tns:InstanceTraceAccessQuery2Request" />
+			<wsdl:output message="tns:InstanceTraceAccessQuery2Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceAccessQuery3">
+			<wsdl:input message="tns:InstanceTraceAccessQuery3Request" />
+			<wsdl:output message="tns:InstanceTraceAccessQuery3Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceTestAccessQuery2">
+			<wsdl:input message="tns:InstanceTraceTestAccessQuery2Request" />
+			<wsdl:output message="tns:InstanceTraceTestAccessQuery2Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceTestAccessQuery3">
+			<wsdl:input message="tns:InstanceTraceTestAccessQuery3Request" />
+			<wsdl:output message="tns:InstanceTraceTestAccessQuery3Response" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="GetUpdates">
+			<wsdl:input message="tns:GetUpdatesRequest" />
+			<wsdl:output message="tns:GetUpdatesResponse" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+		<wsdl:operation name="GetVersion">
+			<wsdl:input message="tns:GetVersionRequest" />
+			<wsdl:output message="tns:GetVersionResponse" />
+			<wsdl:fault name="PDPFault" message="tns:PDPFault" />
+		</wsdl:operation>
+        <wsdl:operation name="InvalidateAttributeCache">
+            <wsdl:input message="tns:InvalidateAttributeCacheRequest" />
+            <wsdl:output message="tns:InvalidateAttributeCacheResponse" />
+            <wsdl:fault name="PDPFault" message="tns:PDPFault" />
+        </wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DelegentPDPBinding" type="tns:DelegentPDPPortType">
+		<wsdl-soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="InstanceAccessQuery2">
+			<wsdl-soap:operation soapAction="InstanceAccessQuery2" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="InstanceAccessQuery3">
+			<wsdl-soap:operation soapAction="InstanceAccessQuery3" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTestAccessQuery2">
+			<wsdl-soap:operation soapAction="InstanceTestAccessQuery2" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTestAccessQuery3">
+			<wsdl-soap:operation soapAction="InstanceTestAccessQuery3" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceAccessQuery2">
+			<wsdl-soap:operation soapAction="InstanceTraceAccessQuery2" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceAccessQuery3">
+			<wsdl-soap:operation soapAction="InstanceTraceAccessQuery3" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceTestAccessQuery2">
+			<wsdl-soap:operation soapAction="InstanceTraceTestAccessQuery2" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="InstanceTraceTestAccessQuery3">
+			<wsdl-soap:operation soapAction="InstanceTraceTestAccessQuery3" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetUpdates">
+			<wsdl-soap:operation soapAction="GetUpdates" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetVersion">
+			<wsdl-soap:operation soapAction="GetVersion" />
+			<wsdl:input>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:input>
+			<wsdl:output>
+				<wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:output>
+			<wsdl:fault name="PDPFault">
+				<wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</wsdl:fault>
+		</wsdl:operation>
+        <wsdl:operation name="InvalidateAttributeCache">
+            <wsdl-soap:operation soapAction="InvalidateAttributeCache" />
+            <wsdl:input>
+                <wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </wsdl:input>
+            <wsdl:output>
+                <wsdl-soap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </wsdl:output>
+            <wsdl:fault name="PDPFault">
+                <wsdl-soap:fault name="PDPFault" use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </wsdl:fault>
+        </wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DelegentPDP">
+		<wsdl:port name="DelegentPDPPort" binding="tns:DelegentPDPBinding">
+			<wsdl-soap:address location="http://ec2-107-21-184-245.compute-1.amazonaws.com:8080/delegent-pdp/DelegentPDP" />
+		</wsdl:port>
+	</wsdl:service>
+
+	<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsaws="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" wsu:Id="PortBindingPolicy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<wsaws:UsingAddressing xmlns:wsaws="http://www.w3.org/2006/05/addressing/wsdl" />
+				<sp:AsymmetricBinding>
+					<wsp:Policy>
+						<sp:InitiatorToken>
+							<wsp:Policy>
+								<sp:X509Token sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+									<wsp:Policy>
+										<sp:WssX509V3Token10 />
+									</wsp:Policy>
+								</sp:X509Token>
+							</wsp:Policy>
+						</sp:InitiatorToken>
+						<sp:RecipientToken>
+							<wsp:Policy>
+								<sp:X509Token sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/Never">
+									<wsp:Policy>
+										<sp:WssX509V3Token10 />
+									</wsp:Policy>
+								</sp:X509Token>
+							</wsp:Policy>
+						</sp:RecipientToken>
+						<sp:Layout>
+							<wsp:Policy>
+								<sp:Strict />
+							</wsp:Policy>
+						</sp:Layout>
+						<sp:IncludeTimestamp />
+						<sp:OnlySignEntireHeadersAndBody />
+						<sp:AlgorithmSuite>
+							<wsp:Policy>
+								<sp:Basic128 />
+							</wsp:Policy>
+						</sp:AlgorithmSuite>
+					</wsp:Policy>
+				</sp:AsymmetricBinding>
+<!--				<sunsp:DisableStreamingSecurity xmlns:sunsp="http://schemas.sun.com/2006/03/wss/server"/> -->
+				<sp:Wss10>
+					<wsp:Policy>
+						<sp:MustSupportRefKeyIdentifier />
+						<sp:MustSupportRefIssuerSerial />
+					</wsp:Policy>
+				</sp:Wss10>
+				
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsaws="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" wsu:Id="PortBinding_Input_Policy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sp:EncryptedParts>
+					<sp:Body />
+				</sp:EncryptedParts>
+				<sp:SignedParts>
+					<sp:Body />
+					<sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+					<sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+					<sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+				</sp:SignedParts>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+	<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsaws="http://www.w3.org/2005/08/addressing" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" wsu:Id="PortBinding_Output_Policy">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sp:EncryptedParts>
+					<sp:Body />
+				</sp:EncryptedParts>
+				<sp:SignedParts>
+					<sp:Body />
+					<sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+					<sp:Header Name="AckRequested" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+					<sp:Header Name="SequenceAcknowledgement" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+					<sp:Header Name="Sequence" Namespace="http://schemas.xmlsoap.org/ws/2005/02/rm" />
+				</sp:SignedParts>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>
+</wsdl:definitions>
