@@ -1,11 +1,15 @@
 package org.EzAz.generic.Layer2;
 
+import java.io.PrintStream;
+
 import org.EzAz.Layer2.AdviceObligation;
+import org.EzAz.Layer2.AdviceObligationSetter;
 import org.EzAz.Layer2.AttributeAssignment;
 import org.EzAz.Layer2.Identifier;
+import org.EzAz.Layer2.Response;
 import org.EzAz.Layer2.abstractSet;
 
-public class genericAdviceObligation implements AdviceObligation {
+public class genericAdviceObligation implements AdviceObligation, AdviceObligationSetter {
 
 	private abstractSet<AttributeAssignment> attributeAssignments;
 	Identifier id;
@@ -13,7 +17,8 @@ public class genericAdviceObligation implements AdviceObligation {
 	
 	@Override
 	public abstractSet<AttributeAssignment> getAttributeAssignments() {
-		// TODO Auto-generated method stub
+		if (attributeAssignments == null)
+			attributeAssignments=new abstractSet<AttributeAssignment>();
 		return attributeAssignments;
 	}
 
@@ -48,4 +53,22 @@ public class genericAdviceObligation implements AdviceObligation {
 			return false;
 	}
 
+	@Override
+	public void setId(Identifier id) {
+		this.id=id;
+	}
+
+	@Override
+	public void setAttributeAssignments(
+			abstractSet<AttributeAssignment> attributeAssignments) {
+		this.attributeAssignments=attributeAssignments;
+	}
+
+	public static void prettyPrint(PrintStream ps, String header, AdviceObligation obl) {
+		ps.println(header+"OBLIGATION: "+obl.getId().toString());
+		abstractSet<AttributeAssignment> a = obl.getAttributeAssignments();
+		for (AttributeAssignment assign: a) {
+			genericAttributeAssignment.prettyPrint(ps, header+"  ", assign);
+		}
+	}
 }

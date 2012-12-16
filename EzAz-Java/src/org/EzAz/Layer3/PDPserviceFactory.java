@@ -70,6 +70,8 @@ public class PDPserviceFactory {
 	/**
 	 * Creates an empty new Request object. This function will create an object
 	 * of the Request interface of the loaded Layer 2 library.
+	 * 
+	 * TODO: Make it create either XACML 2 or 3. We need an input parameter here!!!
 	 */
 	public static Request newRequest() {
 		try {

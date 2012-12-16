@@ -1,8 +1,15 @@
 package org.EzAz.generic.Layer2;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
+
+import org.EzAz.Layer2.AttributeEntity;
+import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Response;
 import org.EzAz.Layer2.ResponseSetter;
 import org.EzAz.Layer2.Result;
+import org.EzAz.Layer2.Status;
+import org.EzAz.Layer2.abstractMap;
 import org.EzAz.Layer2.abstractSet;
 
 public class genericResponse implements Response, ResponseSetter {
@@ -57,5 +64,14 @@ public class genericResponse implements Response, ResponseSetter {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public static void prettyPrint(PrintStream ps, String header, Response resp) {
+		ps.println ("RESPONSE");
+		for (Result result: resp.getResults()) {
+			ps.println ("  RESULT: ");
+			genericResult.prettyPrint(ps, header+"  ", result);
+		}
+	}
+	
 
 }

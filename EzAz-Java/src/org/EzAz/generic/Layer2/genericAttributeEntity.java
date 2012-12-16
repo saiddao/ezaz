@@ -1,5 +1,7 @@
 package org.EzAz.generic.Layer2;
 
+import java.io.PrintStream;
+
 import org.EzAz.Layer2.Attribute;
 import org.EzAz.Layer2.AttributeEntity;
 import org.EzAz.Layer2.Identifier;
@@ -40,6 +42,15 @@ public class genericAttributeEntity implements AttributeEntity {
 	@Override
 	public void setContent(Object content) {
 		this.content=content;
+	}
+
+	public static void prettyPrint(PrintStream ps, String header, AttributeEntity ent) {
+		abstractSet<Attribute> attributes = ent.getAttributes();
+		System.out.println (header+"CATEGORY: "+ent.getCategory().toString());
+		for (Attribute a: attributes) {
+			genericAttribute.prettyPrint(ps, header+"  ", a);
+		}
+
 	}
 
 }

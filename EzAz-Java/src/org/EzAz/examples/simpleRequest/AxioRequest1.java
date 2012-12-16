@@ -27,6 +27,7 @@ import org.EzAz.Layer2.Response;
 import org.EzAz.Layer3.PDPService;
 import org.EzAz.Layer3.PDPserviceFactory;
 import org.EzAz.generic.Layer2.genericLayer2Utils;
+import org.EzAz.generic.Layer2.genericResponse;
 
 public class AxioRequest1 {
 
@@ -69,9 +70,9 @@ public class AxioRequest1 {
 		h.addAttribute(AttributeEntity.CAT_ACTION,
 				Identifier.create("urn:oasis:names:tc:xacml:1.0:action:action-id"), null, "add").setIncludeInResult(true);
 		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("var1"), null, 2).setIncludeInResult(true);
+				Identifier.create("var1"), null, 26).setIncludeInResult(true);
 		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("var2"), null, 47).setIncludeInResult(true);
+				Identifier.create("var2"), null, 20).setIncludeInResult(true);
 		h.addAttribute(AttributeEntity.CAT_SUBJECT,
 				Identifier.create("urn:org:apache:tomcat:user-role"), null, "mathematician").setIncludeInResult(true);
 		
@@ -86,7 +87,7 @@ public class AxioRequest1 {
 			e.printStackTrace();
 			return;
 		}
-		genericLayer2Utils.prettyPrint(resp);
+		genericResponse.prettyPrint(System.out, "", resp);
 		// Check whether the response allows our request.
 		System.out.println("IS ALLOWED? "+resp.isAllowed(false));
 	}

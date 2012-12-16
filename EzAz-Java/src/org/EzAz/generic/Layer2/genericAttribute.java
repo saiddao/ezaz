@@ -1,5 +1,6 @@
 package org.EzAz.generic.Layer2;
 
+import java.io.PrintStream;
 import java.util.AbstractMap;
 import java.util.Collection;
 
@@ -77,6 +78,10 @@ public class genericAttribute implements Attribute {
 	@Override
 	public boolean getIncludeInResult() {
 		return includeInResult;
+	}
+	
+	public static void prettyPrint(PrintStream ps, String header, Attribute a) {
+		ps.println (header+"ATTR: "+a.getId().toASCIIString()+"="+a.getValue().toString()+" ("+a.getType().toASCIIString()+")");
 	}
 
 }

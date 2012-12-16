@@ -40,6 +40,7 @@ public class Request1 {
 		InputStream propFile = this.getClass().getClassLoader().getResourceAsStream("org/EzAz/examples/simpleRequest/sdk.properties");
         try {
         	prop.load(propFile);
+        	// Initialize the SDK including all PDP connections
         	PDPserviceFactory.initSDK(prop);
         } catch (IOException e) {
             e.printStackTrace();

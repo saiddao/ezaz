@@ -1,5 +1,7 @@
 package org.EzAz.generic.Layer2;
 
+import java.io.PrintStream;
+
 import org.EzAz.Layer2.Status;
 import org.EzAz.Layer2.StatusSetter;
 
@@ -37,6 +39,15 @@ public class genericStatus implements Status, StatusSetter {
 	@Override
 	public String getStatusMessage() {
 		return statusMessage;
+	}
+
+	public static void prettyPrint(PrintStream ps, String header, Status status) {
+		String tmp=status.getStatusCode();
+		ps.println(header+"STATUS CODE: "+(tmp != null? tmp : ""));
+		tmp=status.getStatusDetail();
+		ps.println(header+"STATUS DETAIL: "+(tmp != null? tmp : ""));
+		tmp=status.getStatusMessage();
+		ps.println(header+"STATUS MESSAGE: "+(tmp != null? tmp : ""));
 	}
 
 }
