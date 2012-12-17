@@ -223,6 +223,7 @@ public class XmlDriver extends AsyncEmulator {
 	private genericAdviceObligation xmlAdviceToEzAzObligation(
 			AdviceType xmlAdvice) {
 		genericAdviceObligation ezAzObl = new genericAdviceObligation();
+		ezAzObl.setAttributeAssignments(new abstractSet<AttributeAssignment>());
 		ezAzObl.setId(Identifier.create(xmlAdvice.getAdviceId()));
 		List<AttributeAssignmentType> xmlAttrAssignList = xmlAdvice.getAttributeAssignment();
 		if (xmlAttrAssignList != null) {
