@@ -26,7 +26,7 @@ import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.Response;
 import org.EzAz.Layer3.PDPService;
 import org.EzAz.Layer3.PDPserviceFactory;
-import org.EzAz.generic.Layer2.genericLayer2Utils;
+import org.EzAz.generic.Layer2.genericRequest;
 import org.EzAz.generic.Layer2.genericResponse;
 
 public class AxioRequest1 {
@@ -77,7 +77,7 @@ public class AxioRequest1 {
 				Identifier.create("urn:org:apache:tomcat:user-role"), null, "mathematician").setIncludeInResult(true);
 		
 		// Print out the request
-		genericLayer2Utils.prettyPrint(req);
+		genericRequest.prettyPrint(System.out, "", req);
 
 		// Now call the PDP using the evaluate() function.
 		Response resp;
