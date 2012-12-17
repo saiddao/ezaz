@@ -17,8 +17,6 @@ public class genericAdviceObligation implements AdviceObligation, AdviceObligati
 	
 	@Override
 	public abstractSet<AttributeAssignment> getAttributeAssignments() {
-		if (attributeAssignments == null)
-			attributeAssignments=new abstractSet<AttributeAssignment>();
 		return attributeAssignments;
 	}
 

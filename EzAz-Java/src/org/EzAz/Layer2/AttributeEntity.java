@@ -21,6 +21,11 @@ package org.EzAz.Layer2;
 public interface AttributeEntity {
 
 	public static Identifier CAT_SUBJECT = Identifier.create ("urn:oasis:names:tc:xacml:1.0:subject-category:access-subject");
+	public static Identifier CAT_SUBJECT_ACCESS = CAT_SUBJECT;
+	public static Identifier CAT_SUBJECT_CODEBASE = Identifier.create ("urn:oasis:names:tc:xacml:1.0:subject-category:codebase");
+	public static Identifier CAT_SUBJECT_INTERMEDIARY = Identifier.create ("urn:oasis:names:tc:xacml:1.0:subject-category:intermediary-subject");
+	public static Identifier CAT_SUBJECT_RECIPIENT = Identifier.create ("urn:oasis:names:tc:xacml:1.0:subject-category:recipient-subject");
+	public static Identifier CAT_SUBJECT_REQUESTING_MACHINE = Identifier.create ("urn:oasis:names:tc:xacml:1.0:subject-category:requesting-machine");
 	public static Identifier CAT_RESOURCE = Identifier.create ("urn:oasis:names:tc:xacml:3.0:attribute-category:resource");
 	public static Identifier CAT_ACTION = Identifier.create ("urn:oasis:names:tc:xacml:3.0:attribute-category:action");
 	public static Identifier CAT_ENVIRONMENT = Identifier.create ("urn:oasis:names:tc:xacml:3.0:attribute-category:environment");

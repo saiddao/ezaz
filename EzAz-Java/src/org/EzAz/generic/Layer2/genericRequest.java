@@ -18,7 +18,7 @@ public class genericRequest implements Request, AttributeHelper {
 	abstractSet<AttributeEntity> repeatedCategories;
 	AttributeEntity currentRepeatedAttributeEntity;
 	boolean combinedDecision;
-	private abstractMap<Identifier, AttributeEntity> myCategoriesEntities;
+	private abstractMap<Identifier, AttributeEntity> myCategoriesEntities=new abstractMap<Identifier, AttributeEntity>();
 	private Identifier repeatedCategoryId;
 
 	@Override
