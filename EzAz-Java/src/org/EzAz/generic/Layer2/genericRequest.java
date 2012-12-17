@@ -1,5 +1,6 @@
 package org.EzAz.generic.Layer2;
 
+import java.io.PrintStream;
 import java.util.Map.Entry;
 
 import org.EzAz.Layer2.Attribute;
@@ -285,6 +286,15 @@ public class genericRequest implements Request, AttributeHelper {
 		currentRepeatedAttributeEntity=new genericAttributeEntity();
 		currentRepeatedAttributeEntity.setCategory(repeatedCategoryId);
 		repeatedCategories.add(currentRepeatedAttributeEntity);
+	}
+	
+	public static void prettyPrint(PrintStream ps, String header, Request req) {
+		System.out.println ("REQUEST");
+		abstractMap<Identifier, AttributeEntity> categoriesEntities = req.getCategoriesEntities();
+		for (AttributeEntity entity: categoriesEntities.values()) {
+			genericAttributeEntity.prettyPrint(ps, header+"  ", entity);
+		}
+
 	}
 
 }
