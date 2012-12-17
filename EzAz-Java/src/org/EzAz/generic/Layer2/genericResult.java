@@ -35,9 +35,6 @@ public class genericResult implements Result, ResultSetter {
 
 	@Override
 	public abstractSet<AdviceObligation> getObligations() {
-		if (obligations == null && isMutable()) {
-			obligations=new abstractSet<AdviceObligation>();
-		}
 		return obligations;
 	}
 

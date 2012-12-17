@@ -9,7 +9,7 @@ import org.EzAz.Layer2.abstractSet;
 
 public class genericAttributeEntity implements AttributeEntity {
 
-	abstractSet<Attribute> attributes;
+	abstractSet<Attribute> attributes=new abstractSet<Attribute>();
 	Identifier category;
 	Object content;
 	

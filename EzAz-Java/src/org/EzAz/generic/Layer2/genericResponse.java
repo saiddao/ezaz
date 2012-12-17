@@ -19,8 +19,7 @@ public class genericResponse implements Response, ResponseSetter {
 
 	@Override
 	public int getResultLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		return results.size();
 	}
 
 	@Override
