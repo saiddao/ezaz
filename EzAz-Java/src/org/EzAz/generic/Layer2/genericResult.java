@@ -162,11 +162,17 @@ public class genericResult implements Result, ResultSetter {
 		ps.println(header + "DECISION: " + decision);
 		Status status = result.getStatus();
 		genericStatus.prettyPrint(ps, header + "  ", status);
+		// Advice
+		abstractSet<AdviceObligation> advice = result.getAssociatedAdvice();
+		if (advice != null)
+			for (AdviceObligation adv : advice) {
+				genericAdviceObligation.prettyPrint(ps, header + "  ", "ADVICE", adv);
+			}
 		// Obligations
 		abstractSet<AdviceObligation> obligations = result.getObligations();
 		if (obligations != null)
 			for (AdviceObligation obligation : obligations) {
-				genericAdviceObligation.prettyPrint(ps, header + "  ", obligation);
+				genericAdviceObligation.prettyPrint(ps, header + "  ", "OBLIGATION", obligation);
 			}
 		// Attributes
 		abstractMap<Identifier, AttributeEntity> categoriesEntities = result

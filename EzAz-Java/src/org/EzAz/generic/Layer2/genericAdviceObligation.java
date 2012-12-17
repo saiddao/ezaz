@@ -64,8 +64,8 @@ public class genericAdviceObligation implements AdviceObligation, AdviceObligati
 		this.attributeAssignments=attributeAssignments;
 	}
 
-	public static void prettyPrint(PrintStream ps, String header, AdviceObligation obl) {
-		ps.println(header+"OBLIGATION: "+obl.getId().toString());
+	public static void prettyPrint(PrintStream ps, String header, String type, AdviceObligation obl) {
+		ps.println(header+type+": "+obl.getId().toString());
 		abstractSet<AttributeAssignment> a = obl.getAttributeAssignments();
 		for (AttributeAssignment assign: a) {
 			genericAttributeAssignment.prettyPrint(ps, header+"  ", assign);

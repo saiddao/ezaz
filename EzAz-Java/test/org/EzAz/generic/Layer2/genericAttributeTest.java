@@ -13,9 +13,7 @@ package org.EzAz.generic.Layer2;
  * limitations under the License.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -23,8 +21,6 @@ import org.EzAz.Layer2.Attribute;
 import org.EzAz.Layer2.AttributeEntity;
 import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.abstractSet;
-import org.EzAz.generic.Layer2.genericAttribute;
-import org.EzAz.generic.Layer2.genericRequest;
 import org.junit.Test;
 
 public class genericAttributeTest {
