@@ -27,7 +27,7 @@ public interface Attribute {
 	public static Identifier TYPE_TIME = Identifier.create ("http://www.w3.org/2001/XMLSchema#time");
 	public static Identifier TYPE_DATE = Identifier.create ("http://www.w3.org/2001/XMLSchema#date");
 	public static Identifier TYPE_DATETIME = Identifier.create ("http://www.w3.org/2001/XMLSchema#datetime");
-	public static Identifier TYPE_ANYURY = Identifier.create ("http://www.w3.org/2001/XMLSchema#anyURI");
+	public static Identifier TYPE_ANYURI = Identifier.create ("http://www.w3.org/2001/XMLSchema#anyURI");
 	public static Identifier TYPE_HEXBINARY = Identifier.create ("http://www.w3.org/2001/XMLSchema#hexBinary");
 	public static Identifier TYPE_BASE64BINARY = Identifier.create ("http://www.w3.org/2001/XMLSchema#base64Binary");
 	public static Identifier TYPE_X500NAME = Identifier.create ("urn:oasis:names:tc:xacml:1.0:data-type:x500Name");

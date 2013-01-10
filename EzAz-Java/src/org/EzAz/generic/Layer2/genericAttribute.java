@@ -1,14 +1,19 @@
 package org.EzAz.generic.Layer2;
 
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.AbstractMap;
 import java.util.Collection;
 
 import org.EzAz.Layer2.Attribute;
 import org.EzAz.Layer2.Identifier;
 
-public class genericAttribute implements Attribute {
+public class genericAttribute implements Attribute, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9214657975872643096L;
 	private Identifier id, type;
 	private String issuer;
 	private Object value;

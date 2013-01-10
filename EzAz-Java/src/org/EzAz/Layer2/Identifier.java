@@ -12,6 +12,7 @@ package org.EzAz.Layer2;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -22,8 +23,12 @@ import java.net.URL;
  * @version 1.0
  * @created 05-Dec-2012 00:25:51
  */
-public class Identifier implements Comparable<Identifier> {
+public class Identifier implements Comparable<Identifier>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1254860314338014227L;
 	URI uri;
 
 	/**
