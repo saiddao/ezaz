@@ -1,6 +1,6 @@
 package org.EzAz.Layer2;
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,21 @@ import org.EzAz.Layer2.abstractSet;
 /**
  * @author felix
  * @version 1.0
- * @created 13-Dec-2012 19:35:24
+ * @created 10-Jan-2013 17:55:55
  */
 public interface AdviceObligationSetter {
 
 	/**
 	 * Set the Advice/Obligation Id.
 	 * 
-	 * @param id
+	 * @param id    id
 	 */
 	public void setId(Identifier id);
 
 	/**
 	 * Sets the list of attribute assignments.
 	 * 
-	 * @param attributeAssignments
+	 * @param attributeAssignments    attributeAssignments
 	 */
 	public void setAttributeAssignments(abstractSet<AttributeAssignment> attributeAssignments);
 

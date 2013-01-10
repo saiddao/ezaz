@@ -1,7 +1,7 @@
 package org.EzAz.Layer3;
 
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

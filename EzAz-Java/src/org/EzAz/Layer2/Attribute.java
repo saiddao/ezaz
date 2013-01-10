@@ -1,6 +1,6 @@
 package org.EzAz.Layer2;
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@ package org.EzAz.Layer2;
 /**
  * @author felix
  * @version 1.0
- * @created 12-Dec-2012 23:53:39
+ * @created 10-Jan-2013 17:55:56
  */
 public interface Attribute {
 
@@ -100,7 +100,7 @@ public interface Attribute {
 	 * to a Result, then this flag is set (because it was set in the attribute that
 	 * was attached to the Request).
 	 * 
-	 * @param includeInResult
+	 * @param includeInResult    includeInResult
 	 */
 	public void setIncludeInResult(boolean includeInResult);
 

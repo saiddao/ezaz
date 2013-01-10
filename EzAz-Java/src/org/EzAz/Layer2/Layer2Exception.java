@@ -1,6 +1,6 @@
 package org.EzAz.Layer2;
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@ package org.EzAz.Layer2;
 /**
  * @author felix
  * @version 1.0
- * @created 12-Dec-2012 22:54:49
+ * @created 10-Jan-2013 17:55:56
  */
 public abstract class Layer2Exception extends Exception {
 
@@ -24,7 +24,7 @@ public abstract class Layer2Exception extends Exception {
 
 	/**
 	 * 
-	 * @param arg0
+	 * @param arg0    arg0
 	 */
 	public Layer2Exception(String arg0){
 		super(arg0);

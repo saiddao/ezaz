@@ -1,6 +1,6 @@
 package org.EzAz.Layer2;
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package org.EzAz.Layer2;
  * construct a result that corresponds to a request issued by Layer 2 users.
  * @author felix
  * @version 1.0
- * @created 12-Dec-2012 22:54:49
+ * @created 10-Jan-2013 17:55:56
  */
 public interface ResultSetter {
 
@@ -90,7 +90,10 @@ public interface ResultSetter {
 	 */
 	public void setStatus(Status status);
 
-	public void setCategoriesEntities(
-			abstractMap<Identifier, AttributeEntity> attributeEntities);
+	/**
+	 * 
+	 * @param attributeEntities
+	 */
+	public void setCategoriesEntities(abstractMap<Identifier, AttributeEntity> attributeEntities);
 
 }
