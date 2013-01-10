@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.EzAz.Layer2.AttributeEntity;
-import org.EzAz.Layer2.AttributeHelper;
 import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.Response;
@@ -61,20 +60,15 @@ public class xmlRequest1 {
 		PDPService pdp=PDPserviceFactory.getPDP("dummy");
 		// Now construct a new request.
 		Request req=PDPserviceFactory.newRequest();
-		// Our request also implements the AttributeHelper interface.
-		AttributeHelper h=(AttributeHelper)req;
+
 
 		// Now create attributes on the request.
 		//h.addAttribute(AttributeEntity.CAT_SUBJECT,"subject-id", null, "jack");
 
-		h.addAttribute(AttributeEntity.CAT_ACTION,
-				Identifier.create("urn:oasis:names:tc:xacml:1.0:action:action-id"), null, "add").setIncludeInResult(true);
-		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("var1"), null, 26).setIncludeInResult(true);
-		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("var2"), null, 20).setIncludeInResult(true);
-		h.addAttribute(AttributeEntity.CAT_SUBJECT,
-				Identifier.create("urn:org:apache:tomcat:user-role"), null, "mathematician").setIncludeInResult(true);
+		req.addAttribute(AttributeEntity.CAT_ACTION, "urn:oasis:names:tc:xacml:1.0:action:action-id", null, "add").setIncludeInResult(true);
+		req.addAttribute(AttributeEntity.CAT_RESOURCE, "var1", null, 26).setIncludeInResult(true);
+		req.addAttribute(AttributeEntity.CAT_RESOURCE, "var2", null, 20).setIncludeInResult(true);
+		req.addAttribute(AttributeEntity.CAT_SUBJECT, "urn:org:apache:tomcat:user-role", null, "mathematician").setIncludeInResult(true);
 		
 		// Print out the request
 		genericRequest.prettyPrint(System.out, "", req);
