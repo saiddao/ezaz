@@ -1,6 +1,6 @@
 package org.EzAz.Layer2;
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,14 @@ import java.net.URL;
 /**
  * @author felix
  * @version 1.0
- * @created 05-Dec-2012 00:25:51
+ * @created 10-Jan-2013 17:55:56
  */
 public class Identifier implements Comparable<Identifier>, Serializable {
 
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1254860314338014227L;
+     * 
+     */
+    private static final long serialVersionUID = 1254860314338014227L;
 	URI uri;
 
 	/**
