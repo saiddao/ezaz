@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.EzAz.Layer2.AttributeEntity;
-import org.EzAz.Layer2.AttributeHelper;
-import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.Response;
 import org.EzAz.Layer3.PDPService;
@@ -61,20 +59,14 @@ public class Request1 {
 		PDPService pdp=PDPserviceFactory.getPDP("dummy");
 		// Now construct a new request.
 		Request req=PDPserviceFactory.newRequest();
-		// Our request also implements the AttributeHelper interface.
-		AttributeHelper h=(AttributeHelper)req;
 
 		// Now create attributes on the request.
 		//h.addAttribute(AttributeEntity.CAT_SUBJECT,"subject-id", null, "jack");
 
-		h.addAttribute(AttributeEntity.CAT_SUBJECT,
-				Identifier.create("subject-id"), null, "jack");
-		h.addAttribute(AttributeEntity.CAT_ACTION,
-				Identifier.create("action-id"), null, "print");
-		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("resource-type"), null, "document");
-		h.addAttribute(AttributeEntity.CAT_RESOURCE,
-				Identifier.create("resource-id"), null, "TPSreport25.xls");
+		req.addAttribute(AttributeEntity.CAT_SUBJECT, "subject-id", null, "jack");
+		req.addAttribute(AttributeEntity.CAT_ACTION, "action-id", null, "print");
+		req.addAttribute(AttributeEntity.CAT_RESOURCE, "resource-type", null, "document");
+		req.addAttribute(AttributeEntity.CAT_RESOURCE, "resource-id", null, "TPSreport25.xls");
 		
 		// Print out the request
 		genericRequest.prettyPrint(System.out, "", req);
