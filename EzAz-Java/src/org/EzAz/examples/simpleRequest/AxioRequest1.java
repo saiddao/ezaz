@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.EzAz.Layer2.AttributeEntity;
-import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.Response;
 import org.EzAz.Layer3.PDPService;
