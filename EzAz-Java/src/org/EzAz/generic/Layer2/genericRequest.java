@@ -1,17 +1,28 @@
 package org.EzAz.generic.Layer2;
-
+/**
+ * Copyright 2012-2013 Felix Gaehtgens
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import java.io.PrintStream;
 import java.util.Map.Entry;
 
 import org.EzAz.Layer2.Attribute;
 import org.EzAz.Layer2.AttributeEntity;
-import org.EzAz.Layer2.AttributeHelper;
 import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.abstractMap;
 import org.EzAz.Layer2.abstractSet;
 
-public class genericRequest implements Request, AttributeHelper {
+public class genericRequest implements Request  {
 	
 	int version=3;
 	boolean returnPolicyIdList=false;
@@ -151,7 +162,7 @@ public class genericRequest implements Request, AttributeHelper {
 	}
 
 	@Override
-	public void addCategory(Identifier cat, abstractSet<Attribute> attributes) throws genericLayer2RuntimeException {
+	public AttributeEntity addCategory(Identifier cat, abstractSet<Attribute> attributes) throws genericLayer2RuntimeException {
 		abstractMap<Identifier, AttributeEntity> categoryMap =
 			getCategoriesEntities();
 		if (categoryMap.containsKey(cat)) {
@@ -161,10 +172,11 @@ public class genericRequest implements Request, AttributeHelper {
 		ent.setCategory(cat);
 		ent.setAttributes(attributes);
 		categoryMap.put(cat, ent);
+		return ent;
 	}
 
 	@Override
-	public void addCategory(AttributeEntity entity) throws genericLayer2RuntimeException {
+	public AttributeEntity addCategory(AttributeEntity entity) throws genericLayer2RuntimeException {
 		abstractMap<Identifier, AttributeEntity> categoryEntities =
 			getCategoriesEntities();
 		Identifier cat=entity.getCategory();
@@ -175,6 +187,7 @@ public class genericRequest implements Request, AttributeHelper {
 			throw new genericLayer2RuntimeException ("Trying to add a category that already exists!");
 		}
 		categoryEntities.put(cat, entity);
+		return entity;
 	}
 
 	@Override
@@ -295,6 +308,36 @@ public class genericRequest implements Request, AttributeHelper {
 			genericAttributeEntity.prettyPrint(ps, header+"  ", entity);
 		}
 
+	}
+
+	@Override
+	public Attribute addAttribute(String category, String id, String issuer, Identifier type, Object value) {
+	    return addAttribute (Identifier.create(category), Identifier.create(id), issuer, type, value);
+	}
+
+	@Override
+	public Attribute addAttribute(String category, String id, String issuer, boolean val) {
+	    return addAttribute (Identifier.create(category), Identifier.create(id), issuer, val);
+	}
+
+	@Override
+	public Attribute addAttribute(Identifier category, String id, String issuer, int val) {
+	    return addAttribute (category, Identifier.create(id), issuer, val);
+	}
+
+	@Override
+	public Attribute addAttribute(Identifier category, String id, String issuer, String val) {
+	    return addAttribute (category, Identifier.create(id), issuer, val);
+	}
+
+	@Override
+	public void removeAttribute(Identifier category, String id, String issuer) {
+	    removeAttribute (category, Identifier.create(id), issuer);
+	}
+
+	@Override
+	public void setRepeatedCategoryId(String id) {
+	    // TODO Auto-generated method stub
 	}
 
 }
