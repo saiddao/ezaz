@@ -1,6 +1,6 @@
 package org.EzAz.Layer2;
 /**
- * Copyright 2012 Felix Gaehtgens
+ * Copyright 2012-2013 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@ package org.EzAz.Layer2;
 /**
  * @author felix
  * @version 1.0
- * @created 12-Dec-2012 22:54:49
+ * @created 10-Jan-2013 17:55:56
  */
 @SuppressWarnings("rawtypes")
 public abstract class layer2Bootstrapper {
@@ -32,58 +32,41 @@ public abstract class layer2Bootstrapper {
 	/**
 	 * Retrieves the Request class.
 	 */
-	abstract public Class classRequest();
+	public abstract Class classRequest();
 
 	/**
 	 * Retrieves the Attribute class.
 	 */
-	abstract public Class classAttribute();
+	public abstract Class classAttribute();
 
 	/**
 	 * Retrieves the Response class.
 	 */
-	abstract public Class classResponse();
+	public abstract Class classResponse();
 
 	/**
 	 * Retrieves the Response class.
 	 */
-	abstract public Class classResult();
+	public abstract Class classResult();
 
-	public Object create(Object o) throws Exception {
-		try {
-			if (o instanceof AdviceObligation)
-				return classAdviceObligation().newInstance();
-			else if (o instanceof Attribute)
-				return classAttribute().newInstance();
-			else if (o instanceof AttributeAssignment)
-				return classAttributeAssignment().newInstance();
-			else if (o instanceof AttributeEntity)
-				return classAttributeEntity().newInstance();
-			else if (o instanceof IdReference)
-				return classIdReference().newInstance();
-			else if (o instanceof Request)
-				return classRequest().newInstance();
-			else if (o instanceof Response)
-				return classResponse().newInstance();
-			else if (o instanceof Result)
-				return classResult().newInstance();
-			else if (o instanceof Status)
-				return classStatus().newInstance();
-			else
-				throw new RuntimeException ("Cannot instantiate unknown class: "+o.getClass().getName());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+	/**
+	 * 
+	 * @param o
+	 * @exception Exception
+	 */
+	public Object create(Object o)
+	  throws Exception{
+		return null;
 	}
-	
-	abstract public Class classAttributeAssignment();
 
-	abstract public Class classAttributeEntity();
+	public abstract Class classAttributeAssignment();
 
-	abstract public Class classIdReference();
+	public abstract Class classAttributeEntity();
 
-	abstract public Class classStatus();
+	public abstract Class classIdReference();
 
-	abstract public Class classAdviceObligation();
+	public abstract Class classStatus();
+
+	public abstract Class classAdviceObligation();
 
 }
