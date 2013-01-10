@@ -16,6 +16,10 @@ public class PDPFault
 {
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = -6898224992460255386L;
+    /**
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
