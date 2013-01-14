@@ -33,7 +33,7 @@ public class PDPserviceFactory {
 	private static final String PROP_LAYER2 = "org.EzAz.layer2Implementation";
 	private static final String PROP_LAYER2_DEFAULT = "org.EzAz.generic.Layer2";
 	static String PREFIX = "org.EzAz.";
-	static String PREFIX_PDP = "org.EzAz.pdp.";
+	public static String PREFIX_PDP = "org.EzAz.pdp.";
 	static Class<Request> requestClass = null;
 	static Class<Result> resultClass = null;
 	static Class<Response> responseClass = null;
@@ -229,6 +229,7 @@ public class PDPserviceFactory {
 							.loadClass(driverClass);
 					org.EzAz.Layer3.PDPService pdpService = (org.EzAz.Layer3.PDPService) pdp
 							.newInstance();
+					pdpService.setupConnection(pp);
 					pdps.put(s, pdpService);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block

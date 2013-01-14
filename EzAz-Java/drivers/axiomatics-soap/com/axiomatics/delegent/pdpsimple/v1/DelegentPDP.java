@@ -27,14 +27,11 @@ public class DelegentPDP
 
     static {
         URL url = null;
-        try {
-            URL baseUrl;
-            baseUrl = com.axiomatics.delegent.pdpsimple.v1.DelegentPDP.class.getResource(".");
-            url = new URL(baseUrl, "file:/C:/Users/felix/git/ezaz/EzAz-Java/drivers/DelegentPDP.xml");
-        } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'file:/C:/Users/felix/git/ezaz/EzAz-Java/drivers/DelegentPDP.xml', retrying as a local file");
-            logger.warning(e.getMessage());
-        }
+	// url = new URL(baseUrl,
+	// "file:/C:/Users/felix/git/ezaz/EzAz-Java/drivers/DelegentPDP.xml");
+	url = com.axiomatics.delegent.pdpsimple.v1.DelegentPDP.class
+		.getResource("/org/EzAz/Layer3Driver/Axiomatics/DelegentPDP.xml");
+	URL url2=ClassLoader.getSystemResource("/org/EzAz/Layer3Driver/Axiomatics/DelegentPDP.xml");
         DELEGENTPDP_WSDL_LOCATION = url;
     }
 
