@@ -29,7 +29,7 @@ public interface Request {
 	 * @param type    The data type of the attribute.
 	 * @param value    The attribute's value.
 	 */
-	public Attribute addAttribute(String category, String id, String issuer, Identifier type, Object value);
+	public Attribute addAttribute(Identifier category, String id, String issuer, Identifier type, Object value);
 
 	/**
 	 * Add an attribute.
@@ -56,7 +56,7 @@ public interface Request {
 	 * @param issuer    The issuer of the Attribute.
 	 * @param val    The attribute's Boolean value.
 	 */
-	public Attribute addAttribute(String category, String id, String issuer, boolean val);
+	public Attribute addAttribute(Identifier category, String id, String issuer, boolean val);
 
 	/**
 	 * Add an attribute of type Boolean.
