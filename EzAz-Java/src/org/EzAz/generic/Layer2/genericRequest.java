@@ -311,13 +311,13 @@ public class genericRequest implements Request  {
 	}
 
 	@Override
-	public Attribute addAttribute(String category, String id, String issuer, Identifier type, Object value) {
-	    return addAttribute (Identifier.create(category), Identifier.create(id), issuer, type, value);
+	public Attribute addAttribute(Identifier category, String id, String issuer, Identifier type, Object value) {
+	    return addAttribute (category, Identifier.create(id), issuer, type, value);
 	}
 
 	@Override
-	public Attribute addAttribute(String category, String id, String issuer, boolean val) {
-	    return addAttribute (Identifier.create(category), Identifier.create(id), issuer, val);
+	public Attribute addAttribute(Identifier category, String id, String issuer, boolean val) {
+	    return addAttribute (category, Identifier.create(id), issuer, val);
 	}
 
 	@Override
@@ -337,7 +337,7 @@ public class genericRequest implements Request  {
 
 	@Override
 	public void setRepeatedCategoryId(String id) {
-	    // TODO Auto-generated method stub
+	    setRepeatedCategoryId(Identifier.create(id));
 	}
 
 }
