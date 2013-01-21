@@ -59,7 +59,7 @@ public class ViewDsRequest1 {
 	// called "dummy" and get a handle. This name is defined in
 	// the properties file.
 	// We need this handle to communicate with the PDP.
-	PDPService pdp = PDPserviceFactory.getPDP("axio");
+	PDPService pdp = PDPserviceFactory.getPDP("viewds");
 	// Now construct a new request.
 	Request req = PDPserviceFactory.newRequest();
 
