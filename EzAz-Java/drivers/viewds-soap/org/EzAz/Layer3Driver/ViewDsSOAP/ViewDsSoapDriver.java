@@ -122,11 +122,6 @@ public class ViewDsSoapDriver extends AsyncEmulator {
 	requestContext.put(BindingProvider.USERNAME_PROPERTY, userName);
 	requestContext.put(BindingProvider.PASSWORD_PROPERTY, passWord);
 
-	// Now we have to create some object for getAuthorizationDecision()
-	// which basically is a oasisXacmlReq
-	// but how can this be done???
-	// Object q=null;
-
 	XACMLAuthzDecisionQueryType query = new XACMLAuthzDecisionQueryType();
 	query.setID("XACMLClient");
 	query.setVersion("2.0");
@@ -152,9 +147,7 @@ public class ViewDsSoapDriver extends AsyncEmulator {
 			ResponseType response = st.getResponse();
 			allResponses.add(response);
 		    }
-			
 		}
-
 	    }
 	}
 	if (allResponses.size() != 1) {
