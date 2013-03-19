@@ -13,12 +13,23 @@ package org.EzAz.Layer3Driver.ViewDsSOAP;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import java.io.FileInputStream;
+import java.security.KeyStore;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.BindingProvider;
@@ -78,7 +89,6 @@ public class ViewDsSoapDriver extends AsyncEmulator {
 	ResponseType viewDsResp = sendViewDsRequest(viewDsRequest);
 	Response ezAzResponse = generateEzAzResponse(viewDsResp);
 	return ezAzResponse;
-
     }
 
     private RequestType createViewDsRequest(Request request) throws Exception {
@@ -113,15 +123,74 @@ public class ViewDsSoapDriver extends AsyncEmulator {
 	return req;
     }
 
-    private ResponseType sendViewDsRequest(RequestType oasisXacmlReq) throws Exception {
-	AuthorizationDecisionService e = new AuthorizationDecisionService();
-	AuthorizationDecisionPort port = e.getAuthorizationDecisionPort();
+    private void init() throws Exception {
+	authzDecisionSvc = new AuthorizationDecisionService();
+	port = authzDecisionSvc.getAuthorizationDecisionPort();
 	BindingProvider bindingProvider = (BindingProvider) port;
 	Map<String, Object> requestContext = bindingProvider.getRequestContext();
 	requestContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endPoint);
-	requestContext.put(BindingProvider.USERNAME_PROPERTY, userName);
-	requestContext.put(BindingProvider.PASSWORD_PROPERTY, passWord);
+	// Set username and password
+	if (userName != null && !userName.isEmpty()) {
+	    authzDecisionSvc.setHandlerResolver(new LocalHandlerResolver(userName, passWord));
+	}
 
+	// Init a SSL context
+	SSLContext sc = SSLContext.getInstance("SSLv3");
+	// Handle Custom trust store
+	if (trustStore != null && !trustStore.isEmpty()) {
+	    FileInputStream fis = new FileInputStream(trustStore);
+	    KeyStore ks = KeyStore.getInstance(trustStoreType);
+	    ks.load(fis, trustStorePassword.toCharArray());
+	    fis.close();
+	    TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+	    tmf.init(ks);
+	    sc.init(null, tmf.getTrustManagers(), null);
+	} else if (trustAnyCertificate) {
+	    TrustManager bla = new X509TrustManager() {
+
+		@Override
+		public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+		    // Return true for every client certificate (unsafe!)
+		    System.out.println("FELIX: checkClientTrusted!");
+		}
+
+		@Override
+		public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+		    // Return true for every server certificate (unsafe!)
+		    System.out.println("FELIX: checkServerTrusted!");
+		}
+
+		@Override
+		public X509Certificate[] getAcceptedIssuers() {
+		    // TODO Auto-generated method stub
+		    System.out.println("FELIX: getAcceptedIssuers!");
+		    return null;
+		}
+	    };
+	    TrustManager mybla[] = { bla };
+	    sc.init(null, mybla, null);
+	} else 
+	    sc.init(null, null, null);
+	bindingProvider.getRequestContext().put(com.sun.xml.internal.ws.developer.JAXWSProperties.SSL_SOCKET_FACTORY,
+						sc.getSocketFactory());
+	if (!hostnameVerification) {
+	    HostnameVerifier hnv = new HostnameVerifier() {
+		@Override
+		public boolean verify(String arg0, SSLSession arg1) {
+		    // Don't check - just return true.
+		    return true;
+		}
+	    };
+
+	    bindingProvider.getRequestContext()
+		    .put(com.sun.xml.internal.ws.developer.JAXWSProperties.HOSTNAME_VERIFIER, hnv);
+
+	}
+    }
+
+    private ResponseType sendViewDsRequest(RequestType oasisXacmlReq) throws Exception {
+	if (port == null)
+	    init();
 	XACMLAuthzDecisionQueryType query = new XACMLAuthzDecisionQueryType();
 	query.setID("XACMLClient");
 	query.setVersion("2.0");
@@ -132,18 +201,17 @@ public class ViewDsSoapDriver extends AsyncEmulator {
 	query.setRequest(oasisXacmlReq);
 
 	oasis.names.tc.saml._2_0.protocol.ResponseType resp = port.getAuthorizationDecision(query);
-	ArrayList<ResponseType> allResponses=new ArrayList<ResponseType>();
+	ArrayList<ResponseType> allResponses = new ArrayList<ResponseType>();
 	List<Object> assertions = resp.getAssertionOrEncryptedAssertion();
 	for (Object oo : assertions) {
 	    System.out.println("Got back assertion type: " + oo);
 	    if (oo instanceof oasis.names.tc.saml._2_0.assertion.AssertionType) {
-		oasis.names.tc.saml._2_0.assertion.AssertionType assertion =
-			(oasis.names.tc.saml._2_0.assertion.AssertionType) oo;
+		oasis.names.tc.saml._2_0.assertion.AssertionType assertion = (oasis.names.tc.saml._2_0.assertion.AssertionType) oo;
 		List<StatementAbstractType> list = assertion.getStatementOrAuthnStatementOrAuthzDecisionStatement();
-		for (Object ol: list) {
-		    System.out.println("statement type: "+ol.toString());
+		for (Object ol : list) {
+		    System.out.println("statement type: " + ol.toString());
 		    if (ol instanceof XACMLAuthzDecisionStatementType) {
-			XACMLAuthzDecisionStatementType st=(XACMLAuthzDecisionStatementType) ol;
+			XACMLAuthzDecisionStatementType st = (XACMLAuthzDecisionStatementType) ol;
 			ResponseType response = st.getResponse();
 			allResponses.add(response);
 		    }
@@ -151,8 +219,8 @@ public class ViewDsSoapDriver extends AsyncEmulator {
 	    }
 	}
 	if (allResponses.size() != 1) {
-	    throw new RuntimeException ("Did not get exactly one response for AuthZRequest");
-	} else 
+	    throw new RuntimeException("Did not get exactly one response for AuthZRequest");
+	} else
 	    return allResponses.get(0);
     }
 
@@ -322,11 +390,23 @@ public class ViewDsSoapDriver extends AsyncEmulator {
     }
 
     private static String PROP_ENDPOINT = "endpoint";
-    private static String PROP_USERNAME = "username";
-    private static String PROP_PASSWORD = "password";
+    private static String PROP_USERNAME = "wsse.username";
+    private static String PROP_PASSWORD = "wsse.password";
+    private static String PROP_SSL_HOSTNAMEVERIFICATION = "ssl.HostnameVerification";
+    private static String PROP_SSL_TRUSTSTORE = "ssl.TrustStore.Location";
+    private static String PROP_SSL_TRUSTSTORETYPE = "ssl.TrustStore.Type";
+    private static String PROP_SSL_TRUSTSTOREPASSWORD = "ssl.TrustStore.Password";
+    private static String PROP_SSL_TRUSTANYCERTIFICATE = "ssl.TrustAnyCertificate";
     private String endPoint;
     private String userName;
     private String passWord;
+    private AuthorizationDecisionPort port;
+    private AuthorizationDecisionService authzDecisionSvc;
+    private boolean hostnameVerification;
+    private String trustStore;
+    private String trustStoreType;
+    private String trustStorePassword;
+    private boolean trustAnyCertificate;
 
     @Override
     public void setupConnection(Properties properties) {
@@ -347,11 +427,28 @@ public class ViewDsSoapDriver extends AsyncEmulator {
 	if (endPoint == null || endPoint.length() == 0) {
 	    throw new RuntimeException("ViewDsSOAPdriver: property " + p + " cannot be empty!");
 	}
-	// Check for user name and password
+	// Check for WS-Security user name and password
 	p = prefix + "." + PROP_USERNAME;
 	userName = properties.getProperty(p);
 	p = prefix + "." + PROP_PASSWORD;
 	passWord = properties.getProperty(p);
+	// SSL host name verification (default: true)
+	p = prefix + "." + PROP_SSL_HOSTNAMEVERIFICATION;
+	String tmpProp = properties.getProperty(p, "true");
+	hostnameVerification = !tmpProp.equalsIgnoreCase("false");
+	// SSL Trust Store
+	p = prefix + "." + PROP_SSL_TRUSTSTORE;
+	trustStore = properties.getProperty(p);
+	// SSL Trust Store (default: jks)
+	p = prefix + "." + PROP_SSL_TRUSTSTORETYPE;
+	trustStoreType = properties.getProperty(p, "jks");
+	// SSL Trust Store Password
+	p = prefix + "." + PROP_SSL_TRUSTSTOREPASSWORD;
+	trustStorePassword = properties.getProperty(p, "");
+	// SSL Trust Any Certificate (default: false)
+	p = prefix + "." + PROP_SSL_TRUSTANYCERTIFICATE;
+	tmpProp = properties.getProperty(p, "false");
+	trustAnyCertificate = tmpProp.equalsIgnoreCase("true");
     }
 
 }
