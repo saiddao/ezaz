@@ -1,6 +1,6 @@
 package org.EzAz.AdviceObligationHandlers;
 /**
- * Copyright 2012-2013 Felix Gaehtgens
+ * Copyright 2012 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,6 +12,8 @@ package org.EzAz.AdviceObligationHandlers;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import java.util.Properties;
+
 import org.EzAz.Layer2.Result;
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.AdviceObligation;
@@ -19,7 +21,7 @@ import org.EzAz.Layer2.AdviceObligation;
 /**
  * @author felix
  * @version 1.0
- * @created 12-Dec-2012 22:54:48
+ * @created 04-Mar-2013 17:07:11
  */
 public interface AdviceObligationHandler {
 
@@ -40,5 +42,12 @@ public interface AdviceObligationHandler {
 	 * @param context    context
 	 */
 	public void handleObligation(AdviceObligation obligation, Request request, Result result, Object context);
+
+	/**
+	 * Initializes the handler.
+	 * 
+	 * @param properties
+	 */
+	public void init(Properties properties);
 
 }

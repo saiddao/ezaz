@@ -193,4 +193,17 @@ public class genericResult implements Result, ResultSetter {
 		}
 	}
 
+	public static void handleAdvice(Result r) {
+	    for (AdviceObligation adv: r.getAssociatedAdvice()) {
+		// handle advice
+	    }
+	}
+
+	public static boolean handleObligations(Result r) {
+	    for (AdviceObligation adv: r.getObligations()) {
+		// handle obligations
+	    }
+	    return false;
+	}
+
 }
