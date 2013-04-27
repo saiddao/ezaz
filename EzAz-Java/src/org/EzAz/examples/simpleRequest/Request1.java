@@ -25,6 +25,7 @@ import org.EzAz.Layer2.Response;
 import org.EzAz.Layer3.PDPService;
 import org.EzAz.Layer3.PDPserviceFactory;
 import org.EzAz.generic.Layer2.genericRequest;
+import org.EzAz.generic.Layer2.genericResponse;
 
 public class Request1 {
 
@@ -35,7 +36,7 @@ public class Request1 {
 	public void loadProps() {
 		Properties prop=new Properties();
 		// Load properties
-		InputStream propFile = this.getClass().getClassLoader().getResourceAsStream("org/EzAz/examples/simpleRequest/sdk.properties");
+		InputStream propFile = this.getClass().getClassLoader().getResourceAsStream("org/EzAz/examples/simpleRequest/sdkWithHandlers.properties");
         try {
         	prop.load(propFile);
         	// Initialize the SDK including all PDP connections
@@ -79,7 +80,8 @@ public class Request1 {
 			e.printStackTrace();
 			return;
 		}
-		
+		//genericResponse rr=(genericResponse) resp;
+		genericResponse.prettyPrint(System.out, "", resp);
 		// Check whether the response allows our request.
 		System.out.println("IS ALLOWED? "+resp.isAllowed(false));
 	}

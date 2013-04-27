@@ -14,6 +14,7 @@ package org.EzAz.AdviceObligationHandlers;
  */
 import java.util.Properties;
 
+import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.Result;
 import org.EzAz.Layer2.Request;
 import org.EzAz.Layer2.AdviceObligation;
@@ -49,5 +50,19 @@ public interface AdviceObligationHandler {
 	 * @param properties
 	 */
 	public void init(Properties properties);
+
+	/**
+	 * Return TRUE if this handler can handle an advice identified by id.
+	 * 
+	 * @param id
+	 */
+	public boolean canHandleAdvice(Identifier id);
+
+	/**
+	 * Return TRUE if this handler can handle an obligation identified by id.
+	 * 
+	 * @param id
+	 */
+	public boolean canHandleObligation(Identifier id);
 
 }

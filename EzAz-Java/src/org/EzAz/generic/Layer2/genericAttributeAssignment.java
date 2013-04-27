@@ -45,7 +45,7 @@ public class genericAttributeAssignment implements AttributeAssignment {
 	}
 
 	public static void prettyPrint(PrintStream ps, String header, AttributeAssignment assign) {
-		ps.println(header+"ATTRIBUTEASSIGNMENT: Category="+assign.getCategory().toString());
+		ps.println(header+"ATTRIBUTEASSIGNMENT: Category="+(assign.getCategory() != null ? assign.getCategory().toString() : ""));
 		Attribute attr = assign.getAttribute();
 		genericAttribute.prettyPrint(ps, header+"  ", attr);
 	}

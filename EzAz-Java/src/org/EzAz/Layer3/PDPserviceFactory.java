@@ -13,7 +13,10 @@ package org.EzAz.Layer3;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.Set;
 
 import org.EzAz.AdviceObligationHandlers.AdviceObligationHandler;
 import org.EzAz.Layer2.Attribute;
@@ -36,6 +39,8 @@ public class PDPserviceFactory {
     static String PREFIX = "org.EzAz.";
     public static String PREFIX_PDP = "org.EzAz.pdp.";
     public static String PREFIX_HANDLER = "org.EzAz.handler.";
+    public static String POSTFIX_PRECHAIN_HANDLER = ".prechain.handler";
+    public static String POSTFIX_POSTCHAIN_HANDLER = ".postchain.handler";
     static Class<Request> requestClass = null;
     static Class<Result> resultClass = null;
     static Class<Response> responseClass = null;
@@ -158,6 +163,31 @@ public class PDPserviceFactory {
 	}
     }
 
+    public static abstractMap<String, Properties> splitProperties(Properties prop, String prefix) {
+	abstractMap<String, Properties> propMap = new abstractMap<String, Properties>();
+	Set<Object> keySet = prop.keySet();
+	Iterator<Object> it = keySet.iterator();
+	while (it.hasNext()) {
+	    String propName = it.next().toString();
+	    if (propName.regionMatches(true, 0, prefix, 0, prefix.length())) {
+		// grab name from the keys.
+		String s_tmp = propName.substring(prefix.length() + 1);
+		String s = s_tmp.substring(0, s_tmp.indexOf("."));
+		Properties pdpProp;
+		if (!propMap.containsKey(s)) {
+		    pdpProp = new Properties();
+		    propMap.put(s, pdpProp);
+		} else {
+		    pdpProp = propMap.get(s);
+		}
+		// copy this property to the PDP property
+		pdpProp.put(propName, prop.get(propName));
+		it.remove(); // Remove this from the properties
+	    }
+	}
+	return propMap;
+    }
+
     /**
      * Initializes the SDK.
      * 
@@ -191,81 +221,16 @@ public class PDPserviceFactory {
 	    e.printStackTrace();
 	}
 
-	abstractMap<String, Properties> pdpMap = new abstractMap<String, Properties>();
-	abstractMap<String, Properties> handlerMap = new abstractMap<String, Properties>();
+	abstractMap<String, Properties> pdpMap = splitProperties(properties, "org.EzAz.pdp");
+	abstractMap<String, Properties> handlerMap = splitProperties(properties, "org.EzAz.handler");
 
-	for (String s : properties.stringPropertyNames()) {
-	    // Check for PDP definitions.
-	    // For every PDP definition, we create a new Properties object
-	    // and copy all of the PDP's properties to this Properties object.
-	    if (s.regionMatches(true, 0, PREFIX_PDP, 0, PREFIX_PDP.length())) {
-		// grab PDP name from the keys.
-		String pdpName_tmp = s.substring(PREFIX_PDP.length());
-		String pdpName = pdpName_tmp.substring(0, pdpName_tmp.indexOf("."));
-		// System.out.println("Found PDP Name: " + pdpName);
-		Properties pdpProp;
-		if (!pdpMap.containsKey(pdpName)) {
-		    pdpProp = new Properties();
-		    pdpMap.put(pdpName, pdpProp);
-		} else {
-		    pdpProp = pdpMap.get(pdpName);
-		}
-		// copy this property to the PDP property
-		pdpProp.put(s, properties.get(s));
-	    }
-	    // Check for Handler definitions.
-	    // For every handler definition, we create a new Properties object
-	    // and copy all of the handler's properties to this Properties
-	    // object.
-	    if (s.regionMatches(true, 0, PREFIX_HANDLER, 0, PREFIX_HANDLER.length())) {
-		String handlerName_tmp = s.substring(PREFIX_HANDLER.length());
-		String handlerName = handlerName_tmp.substring(0, handlerName_tmp.indexOf("."));
-		Properties handlerProp;
-		if (!handlerMap.containsKey(handlerName)) {
-		    handlerProp = new Properties();
-		    handlerMap.put(handlerName, handlerProp);
-		} else {
-		    handlerProp = handlerMap.get(handlerName);
-		}
-		// copy this property to the handler property
-		handlerProp.put(s, properties.get(s));
-	    }
-	}
-	// Init all PDPs
-	// and also Print out all the PDP definitions
-	for (String s : pdpMap.keySet()) {
-	    Properties pp = pdpMap.get(s);
-	    System.out.println("PROPERTIES FOR PDP DRIVER: " + s + "\n" + pp.toString());
-	    // Find the class of the driver
-	    String driverClassProp = PREFIX_PDP + s + ".driver";
-	    System.out.println("Fetching PDP driver: " + driverClassProp);
-	    String driverClass = pp.getProperty(driverClassProp);
-	    if (driverClass != null) {
-		Class pdp;
-		try {
-		    pdp = (Class<PDPService>) classLoader.loadClass(driverClass);
-		    org.EzAz.Layer3.PDPService pdpService = (org.EzAz.Layer3.PDPService) pdp.newInstance();
-		    pdpService.setupConnection(pp);
-		    pdps.put(s, pdpService);
-		} catch (ClassNotFoundException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (InstantiationException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (IllegalAccessException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		}
-	    }
-	}
 	// Init all handlers
 	// and also print out all handler definitions
 	for (String s : handlerMap.keySet()) {
 	    Properties pp = handlerMap.get(s);
 	    System.out.println("PROPERTIES FOR HANDLER DRIVER: " + s + "\n" + pp.toString());
 	    // Find the class of the driver
-	    String driverClassProp = PREFIX_HANDLER + s + ".driver";
+	    String driverClassProp = PREFIX_HANDLER + s + ".class";
 	    System.out.println("Fetching handler driver: " + driverClassProp);
 	    String driverClass = pp.getProperty(driverClassProp);
 	    if (driverClass != null) {
@@ -288,6 +253,64 @@ public class PDPserviceFactory {
 		}
 	    }
 
+	}
+	// Init all PDPs
+	// and also Print out all the PDP definitions
+	for (String s : pdpMap.keySet()) {
+	    Properties pp = pdpMap.get(s);
+	    System.out.println("PROPERTIES FOR PDP DRIVER: " + s + "\n" + pp.toString());
+	    // Find the class of the driver
+	    String driverClassProp = PREFIX_PDP + s + ".driver";
+	    System.out.println("Fetching PDP driver: " + driverClassProp);
+	    String driverClass = pp.getProperty(driverClassProp);
+	    if (driverClass != null) {
+		Class pdp;
+		try {
+		    pdp = (Class<PDPService>) classLoader.loadClass(driverClass);
+		    org.EzAz.Layer3.PDPService pdpService = (org.EzAz.Layer3.PDPService) pdp.newInstance();
+		    // Load handler chains
+		    String preChainHandlers = (String) pp.get(PREFIX_PDP + s + ".handlers.prechain");
+		    System.out.println("PRE CHAIN HANDLERS LIST: " + preChainHandlers);
+		    if (preChainHandlers != null) {
+			String[] handlerNames = preChainHandlers.split(",\\s*");
+			for (int x = 0; x < handlerNames.length; x++) {
+			    System.out.println("GOT HANDLER: " + handlerNames[x]);
+			    AdviceObligationHandler handler = handlers.get(handlerNames[x]);
+			    if (handler == null) {
+				System.out.println("ERROR: Cannot find handler " + handlerNames[x]);
+			    } else {
+				pdpService.preChain.add(handler);
+			    }
+			}
+		    }
+		    String postChainHandlers = (String) pp.get(PREFIX_PDP + s + ".handlers.postchain");
+		    System.out.println("POST CHAIN HANDLERS LIST: " + postChainHandlers);
+		    if (postChainHandlers != null) {
+			String[] handlerNames = postChainHandlers.split(",\\s*");
+			for (int x = 0; x < handlerNames.length; x++) {
+			    System.out.println("GOT POST HANDLER: [" + handlerNames[x] + "]");
+			    AdviceObligationHandler handler = handlers.get(handlerNames[x]);
+			    if (handler == null) {
+				System.out.println("ERROR: Cannot find handler " + handlerNames[x]);
+			    } else {
+				pdpService.postChain.add(handler);
+			    }
+			}
+		    }
+
+		    pdpService.setupConnection(pp);
+		    pdps.put(s, pdpService);
+		} catch (ClassNotFoundException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (InstantiationException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (IllegalAccessException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
 	}
     }
 

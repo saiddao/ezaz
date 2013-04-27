@@ -52,6 +52,9 @@ public class ViewDsRequest1 {
      * @param args
      */
     public static void main(String[] args) {
+	for (int i=0; i<args.length; i++) {
+	    System.out.println ("ARG["+i+"]: "+args[i]);
+	}
 	ViewDsRequest1 r = new ViewDsRequest1();
 	// Load properties file
 	r.loadProps();

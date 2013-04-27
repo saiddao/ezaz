@@ -1,6 +1,6 @@
 package org.EzAz.AdviceObligationHandlers;
 /**
- * Copyright 2012-2013 Felix Gaehtgens
+ * Copyright 2012 Felix Gaehtgens
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,35 +12,25 @@ package org.EzAz.AdviceObligationHandlers;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.EzAz.Layer2.Identifier;
 import org.EzAz.Layer2.abstractSet;
 
 /**
  * @author felix
  * @version 1.0
- * @created 12-Dec-2012 22:54:48
+ * @created 02-Apr-2013 15:01:32
  */
 public interface AdviceObligationHandlerRegistry {
 
 	/**
 	 * Adds a handler to the Registry.
 	 * 
-	 * @param id    The identifier that the Handler is responsible for.
 	 * @param handler    The Advice/Obligation Handler.
 	 */
-	public void addHandler(Identifier id, AdviceObligationHandler handler);
+	public void addHandler(AdviceObligationHandler handler);
 
 	/**
-	 * Adds a handler to the Registry.
-	 * 
-	 * @param registryEntry    Both the Advice/Obligation Handler and the Identifier
-	 * that the Handler is responsible for in a HandlerRegistryEntry object.
+	 * Return the current handlers.
 	 */
-	public void addHandler(AdviceObligationHandlerRegistryEntry registryEntry);
-
-	/**
-	 * Return the current handlers, as a list of HandlerRegistryEntry objects.
-	 */
-	public abstractSet<AdviceObligationHandlerRegistryEntry> getHandlers();
+	public abstractSet<AdviceObligationHandler> getHandlers();
 
 }
